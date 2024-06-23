@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Salon.App", "Salon.App\Salon.App.csproj", "{B1DB7CB7-BE11-4362-BFFF-882703F776FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Salon.Shared", "Salon.Shared\Salon.Shared.csproj", "{3871419A-F4A2-46E2-B54E-ED9BC6951068}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1DB7CB7-BE11-4362-BFFF-882703F776FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1DB7CB7-BE11-4362-BFFF-882703F776FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1DB7CB7-BE11-4362-BFFF-882703F776FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1DB7CB7-BE11-4362-BFFF-882703F776FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3871419A-F4A2-46E2-B54E-ED9BC6951068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3871419A-F4A2-46E2-B54E-ED9BC6951068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3871419A-F4A2-46E2-B54E-ED9BC6951068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3871419A-F4A2-46E2-B54E-ED9BC6951068}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B98A9EF-DDB8-4964-898B-12B153DD1842}
+	EndGlobalSection
+EndGlobal
