@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Salon.App.Forms;
+﻿namespace Salon.App.Forms;
 public partial class FDashboard : Form
 {
     private readonly ICustomerForm _customerForm;
+    private readonly ILaporanForm _laporanForm;
     private readonly ILayananForm _layananForm;
     private readonly IProdukForm _produkForm;
     private readonly ITransaksiForm _transaksiForm;
     private readonly IUserForm _userForm;
 
-    public FDashboard(ICustomerForm customerForm, ILayananForm layananForm, IProdukForm produkForm, ITransaksiForm transaksiForm, IUserForm userForm)
+    public FDashboard(ICustomerForm customerForm, ILaporanForm laporanForm, ILayananForm layananForm, IProdukForm produkForm, ITransaksiForm transaksiForm, IUserForm userForm)
     {
         InitializeComponent();
         _customerForm = customerForm;
+        _laporanForm = laporanForm;
         _layananForm = layananForm;
         _produkForm = produkForm;
         _transaksiForm = transaksiForm;
@@ -58,7 +50,7 @@ public partial class FDashboard : Form
 
     private void btnLaporan_Click(object sender, EventArgs e)
     {
-
+        _laporanForm.ShowForm();
     }
 
     private void btnLogout_Click(object sender, EventArgs e)

@@ -13,7 +13,7 @@ public class Customer
     public JenisKelamin JenisKelamin { get; set; }
     public DateTime TanggalLahir { get; set; } = DateTime.Today;
     public string Alamat { get; set; } = string.Empty;
-    public string? Telepon { get; set; }
+    public string? Telepon { get; set; } = string.Empty;
 
     public List<Transaksi> Transaksi { get; set; } = null!;
 }

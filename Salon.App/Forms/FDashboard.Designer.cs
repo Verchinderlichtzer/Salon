@@ -91,7 +91,7 @@ partial class FDashboard
         // 
         // pictureBox2
         // 
-        pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
         pictureBox2.Image = Properties.Resources.dua;
         pictureBox2.Location = new Point(723, 6);
         pictureBox2.Name = "pictureBox2";

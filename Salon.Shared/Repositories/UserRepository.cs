@@ -64,6 +64,7 @@ public class UserRepository(AppDbContext appDbContext) : IUserRepository
     {
         try
         {
+            user.Password = Encrypt(user.Password);
             var model = await appDbContext.User.AddAsync(user);
             int result = await appDbContext.SaveChangesAsync();
             return result > 0;

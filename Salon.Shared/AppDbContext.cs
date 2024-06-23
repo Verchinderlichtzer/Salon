@@ -41,11 +41,13 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<DetailProduk>(e =>
         {
+            e.HasOne(x => x.Transaksi).WithMany(x => x.DetailProduk).HasForeignKey(x => x.IdTransaksi);
             e.HasOne(x => x.Produk).WithMany(x => x.DetailProduk).HasForeignKey(x => x.IdProduk);
         });
 
         modelBuilder.Entity<DetailLayanan>(e =>
         {
+            e.HasOne(x => x.Transaksi).WithMany(x => x.DetailLayanan).HasForeignKey(x => x.IdTransaksi);
             e.HasOne(x => x.Layanan).WithMany(x => x.DetailLayanan).HasForeignKey(x => x.IdLayanan);
         });
 
@@ -62,6 +64,26 @@ public class AppDbContext : DbContext
         //    JenisKelamin = JenisKelamin.Pria,
         //    Telepon = "085739194810"
         //});
+
+        modelBuilder.Entity<Customer>().HasData(
+        new Customer
+        {
+            Id = "C-00001",
+            Nama = "Putri",
+            JenisKelamin = JenisKelamin.Wanita,
+            TanggalLahir = new(2000, 12, 12),
+            Alamat = "Bekasi",
+            Telepon = "0853 4677 3443"
+        },
+        new Customer
+        {
+            Id = "C-00002",
+            Nama = "Andi",
+            JenisKelamin = JenisKelamin.Pria,
+            TanggalLahir = new(1997, 4, 7),
+            Alamat = "Jakarta",
+            Telepon = "0833 5275 9486"
+        });
 
         modelBuilder.Entity<Produk>().HasData(
         new Produk

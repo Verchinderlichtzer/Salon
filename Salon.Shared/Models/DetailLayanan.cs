@@ -8,9 +8,11 @@ namespace Salon.Shared.Models;
 public class DetailLayanan
 {
     public int Id { get; set; }
-    public string IdLayanan { get; set; } = string.Empty;
+    public string IdTransaksi { get; set; } = null!;
+    public string IdLayanan { get; set; } = null!;
 
     public int Tarif { get; set; }
 
     public Layanan Layanan { get; set; } = null!;
+    public Transaksi Transaksi { get; set; } = null!;
 }

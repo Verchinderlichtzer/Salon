@@ -34,9 +34,13 @@ partial class FTransaksi
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(800, 450);
+        ClientSize = new Size(784, 561);
+        MaximizeBox = false;
+        MaximumSize = new Size(800, 600);
+        MinimumSize = new Size(800, 600);
         Name = "FTransaksi";
-        Text = "FTransaksi";
+        StartPosition = FormStartPosition.CenterScreen;
+        Text = "Transaksi";
         Load += FTransaksi_Load;
         ResumeLayout(false);
     }

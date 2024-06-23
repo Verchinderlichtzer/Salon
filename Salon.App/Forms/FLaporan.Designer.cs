@@ -1,6 +1,6 @@
 ﻿namespace Salon.App.Forms;
 
-partial class FProduk
+partial class FLaporan
 {
     /// <summary>
     /// Required designer variable.
@@ -30,7 +30,7 @@ partial class FProduk
     {
         SuspendLayout();
         // 
-        // FProduk
+        // FLaporan
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
@@ -38,10 +38,10 @@ partial class FProduk
         MaximizeBox = false;
         MaximumSize = new Size(800, 600);
         MinimumSize = new Size(800, 600);
-        Name = "FProduk";
+        Name = "FLaporan";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "Produk";
-        Load += FProduk_Load;
+        Text = "Laporan";
+        Load += FLaporan_Load;
         ResumeLayout(false);
     }
 

@@ -11,7 +11,7 @@ using Salon.Shared;
 namespace Salon.Shared.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240623005702_First")]
+    [Migration("20240623074719_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -45,6 +45,26 @@ namespace Salon.Shared.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customer");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "C-00001",
+                            Alamat = "Bekasi",
+                            JenisKelamin = (byte)2,
+                            Nama = "Putri",
+                            TanggalLahir = new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Telepon = "0853 4677 3443"
+                        },
+                        new
+                        {
+                            Id = "C-00002",
+                            Alamat = "Jakarta",
+                            JenisKelamin = (byte)1,
+                            Nama = "Andi",
+                            TanggalLahir = new DateTime(1997, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Telepon = "0833 5275 9486"
+                        });
                 });
 
             modelBuilder.Entity("Salon.Shared.Models.DetailLayanan", b =>
@@ -57,12 +77,18 @@ namespace Salon.Shared.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("IdTransaksi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Tarif")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdLayanan");
+
+                    b.HasIndex("IdTransaksi");
 
                     b.ToTable("DetailLayanan");
                 });
@@ -77,6 +103,10 @@ namespace Salon.Shared.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("IdTransaksi")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Jumlah")
                         .HasColumnType("INTEGER");
 
@@ -86,6 +116,8 @@ namespace Salon.Shared.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdProduk");
+
+                    b.HasIndex("IdTransaksi");
 
                     b.ToTable("DetailProduk");
                 });
@@ -238,7 +270,15 @@ namespace Salon.Shared.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Salon.Shared.Models.Transaksi", "Transaksi")
+                        .WithMany("DetailLayanan")
+                        .HasForeignKey("IdTransaksi")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Layanan");
+
+                    b.Navigation("Transaksi");
                 });
 
             modelBuilder.Entity("Salon.Shared.Models.DetailProduk", b =>
@@ -249,7 +289,15 @@ namespace Salon.Shared.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Salon.Shared.Models.Transaksi", "Transaksi")
+                        .WithMany("DetailProduk")
+                        .HasForeignKey("IdTransaksi")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Produk");
+
+                    b.Navigation("Transaksi");
                 });
 
             modelBuilder.Entity("Salon.Shared.Models.Transaksi", b =>
@@ -283,6 +331,13 @@ namespace Salon.Shared.Migrations
 
             modelBuilder.Entity("Salon.Shared.Models.Produk", b =>
                 {
+                    b.Navigation("DetailProduk");
+                });
+
+            modelBuilder.Entity("Salon.Shared.Models.Transaksi", b =>
+                {
+                    b.Navigation("DetailLayanan");
+
                     b.Navigation("DetailProduk");
                 });
 

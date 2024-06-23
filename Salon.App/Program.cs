@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Salon.Shared.Repositories;
-using System;
+using System.Globalization;
 
 namespace Salon.App;
 
@@ -20,6 +19,12 @@ internal static class Program
         Application.SetHighDpiMode(HighDpiMode.SystemAware);
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
+
+        CultureInfo ci = new("id-ID");
+        Thread.CurrentThread.CurrentUICulture = ci;
+        Thread.CurrentThread.CurrentCulture = ci;
+        CultureInfo.DefaultThreadCurrentCulture = ci;
+        CultureInfo.DefaultThreadCurrentUICulture = ci;
 
         var host = CreateHostBuilder().Build();
 
@@ -46,13 +51,16 @@ internal static class Program
                 services.AddSingleton<FDashboard>();
 
                 services.AddTransient<ICustomerForm, FCustomer>();
+                services.AddTransient<ILaporanForm, FLaporan>();
                 services.AddTransient<ILayananForm, FLayanan>();
                 services.AddTransient<IProdukForm, FProduk>();
                 services.AddTransient<ITransaksiForm, FTransaksi>();
                 services.AddTransient<IUserForm, FUser>();
 
                 services.AddSingleton<ICustomerRepository, CustomerRepository>();
+                services.AddSingleton<ILayananRepository, LayananRepository>();
                 services.AddSingleton<IProdukRepository, ProdukRepository>();
+                services.AddSingleton<ITransaksiRepository, TransaksiRepository>();
                 services.AddSingleton<IUserRepository, UserRepository>();
             });
     }

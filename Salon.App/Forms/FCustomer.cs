@@ -1,16 +1,4 @@
-﻿
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Salon.App.Forms;
+﻿namespace Salon.App.Forms;
 public partial class FCustomer : Form, ICustomerForm
 {
     private readonly ICustomerRepository _customerRepository;
@@ -23,40 +11,117 @@ public partial class FCustomer : Form, ICustomerForm
 
     public void ShowForm() => new FCustomer(_customerRepository).Show();
 
-    public async Task RefreshDGV() => dgv.DataSource = await _customerRepository.GetAsync();
+    public async Task RefreshDGV()
+    {
+        dgv.DataSource = (await _customerRepository.GetAsync()).Where(x => x.Nama.Search(cCariCustomer.Text) || x.Alamat.Search(cCariCustomer.Text) || x.Telepon!.Search(cCariCustomer.Text) || x.JenisKelamin.ToString().Search(cCariCustomer.Text)).ToList();
+    }
 
     private async void FCustomer_Load(object sender, EventArgs e)
     {
         await RefreshDGV();
+
+        dgv.Columns[0].Width = 58;
+        dgv.Columns[1].Width = 133;
+        dgv.Columns[2].Width = 102;
+        dgv.Columns[3].Width = 102;
+        dgv.Columns[4].Width = 240;
+        dgv.Columns[5].Width = 99;
+        dgv.Columns["TanggalLahir"].HeaderText = "Tanggal Lahir";
+        dgv.Columns["JenisKelamin"].HeaderText = "Jenis Kelamin";
+        dgv.Columns["TanggalLahir"].DefaultCellStyle.Format = "dd MMM yyyy";
     }
 
     private async void btnSimpan_Click(object sender, EventArgs e)
     {
-        await _customerRepository.AddAsync(new()
+        if (string.IsNullOrEmpty(cNama.Text) || (!cPria.Checked && !cWanita.Checked))
         {
-            Nama = cNama.Text,
-            Alamat = cAlamat.Text,
-            Telepon = cTelepon.Text,
-            JenisKelamin = cLakiLaki.Checked ? JenisKelamin.Pria : JenisKelamin.Wanita,
-            TanggalLahir = cTanggalLahir.Value
-        });
-        await RefreshDGV();
+            MessageBox.Show("""
+                Form yang wajib diisi :
+                1. Nama
+                2. Jenis Kelamin
+                2. Tanggal Lahir
+                """, "Data Belum Lengkap", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            return;
+        }
+        if (string.IsNullOrEmpty(cID.Text))
+        {
+            bool result = await _customerRepository.AddAsync(new()
+            {
+                Nama = cNama.Text,
+                Alamat = cAlamat.Text,
+                Telepon = cTelepon.Text,
+                JenisKelamin = cPria.Checked ? JenisKelamin.Pria : JenisKelamin.Wanita,
+                TanggalLahir = cTanggalLahir.Value
+            });
+            if (!result)
+                MessageBox.Show("Customer gagal ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        else
+        {
+            bool result = await _customerRepository.UpdateAsync(new()
+            {
+                Id = cID.Text,
+                Nama = cNama.Text,
+                Alamat = cAlamat.Text,
+                Telepon = cTelepon.Text,
+                JenisKelamin = cPria.Checked ? JenisKelamin.Pria : JenisKelamin.Wanita,
+                TanggalLahir = cTanggalLahir.Value
+            });
+            if (!result)
+                MessageBox.Show("Customer gagal diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        btnRefresh.PerformClick();
     }
 
     private async void btnHapus_Click(object sender, EventArgs e)
     {
         var id = dgv.CurrentRow.Cells[0].Value.ToString();
-        await _customerRepository.DeleteAsync(id!);
+        DialogResult dr = MessageBox.Show($"Hapus {id}?", "Konfirmasi hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        if (dr == DialogResult.Yes)
+        {
+            bool result = await _customerRepository.DeleteAsync(id!);
+            if (!result)
+                MessageBox.Show("Customer gagal dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            btnRefresh.PerformClick();
+        }
+    }
+
+    private async void btnRefresh_Click(object sender, EventArgs e)
+    {
+        cID.Clear();
+        cNama.Clear();
+        cAlamat.Clear();
+        cTelepon.Clear();
+        cPria.Checked = false;
+        cWanita.Checked = false;
+        cTanggalLahir.Value = DateTime.Today;
+        cCariCustomer.Clear();
+        await RefreshDGV();
+
+        btnSimpan.Text = "Simpan";
+        btnSimpan.BackColor = Color.LimeGreen;
+        btnHapus.Enabled = false;
+        //Clipboard.SetText(string.Join(" - ", dgv.Columns.Cast<DataGridViewColumn>().Select(c => c.Width)));
+    }
+
+    private async void cCariCustomer_TextChanged(object sender, EventArgs e)
+    {
         await RefreshDGV();
     }
 
-    private void btnRefresh_Click(object sender, EventArgs e)
+    private async void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
     {
+        cID.Text = dgv.CurrentRow.Cells[0].Value.ToString();
+        var result = await _customerRepository.FindAsync(cID.Text);
+        cNama.Text = result.Nama;
+        cTelepon.Text = result.Telepon;
+        cAlamat.Text = result.Alamat;
+        cPria.Checked = result.JenisKelamin == JenisKelamin.Pria;
+        cWanita.Checked = result.JenisKelamin == JenisKelamin.Wanita;
+        cTanggalLahir.Value = result.TanggalLahir;
 
-    }
-
-    private void cCariData_TextChanged(object sender, EventArgs e)
-    {
-
+        btnSimpan.Text = "Ubah";
+        btnSimpan.BackColor = Color.Gold;
+        btnHapus.Enabled = true;
     }
 }

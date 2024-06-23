@@ -74,47 +74,6 @@ namespace Salon.Shared.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DetailLayanan",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    IdLayanan = table.Column<string>(type: "TEXT", nullable: false),
-                    Tarif = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DetailLayanan", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DetailLayanan_Layanan_IdLayanan",
-                        column: x => x.IdLayanan,
-                        principalTable: "Layanan",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DetailProduk",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    IdProduk = table.Column<string>(type: "TEXT", nullable: false),
-                    Jumlah = table.Column<int>(type: "INTEGER", nullable: false),
-                    Total = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DetailProduk", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DetailProduk_Produk_IdProduk",
-                        column: x => x.IdProduk,
-                        principalTable: "Produk",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Transaksi",
                 columns: table => new
                 {
@@ -144,6 +103,70 @@ namespace Salon.Shared.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DetailLayanan",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    IdTransaksi = table.Column<string>(type: "TEXT", nullable: false),
+                    IdLayanan = table.Column<string>(type: "TEXT", nullable: false),
+                    Tarif = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DetailLayanan", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DetailLayanan_Layanan_IdLayanan",
+                        column: x => x.IdLayanan,
+                        principalTable: "Layanan",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DetailLayanan_Transaksi_IdTransaksi",
+                        column: x => x.IdTransaksi,
+                        principalTable: "Transaksi",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DetailProduk",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    IdTransaksi = table.Column<string>(type: "TEXT", nullable: false),
+                    IdProduk = table.Column<string>(type: "TEXT", nullable: false),
+                    Jumlah = table.Column<int>(type: "INTEGER", nullable: false),
+                    Total = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DetailProduk", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DetailProduk_Produk_IdProduk",
+                        column: x => x.IdProduk,
+                        principalTable: "Produk",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DetailProduk_Transaksi_IdTransaksi",
+                        column: x => x.IdTransaksi,
+                        principalTable: "Transaksi",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customer",
+                columns: new[] { "Id", "Alamat", "JenisKelamin", "Nama", "TanggalLahir", "Telepon" },
+                values: new object[,]
+                {
+                    { "C-00001", "Bekasi", (byte)2, "Putri", new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "0853 4677 3443" },
+                    { "C-00002", "Jakarta", (byte)1, "Andi", new DateTime(1997, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "0833 5275 9486" }
+                });
+
             migrationBuilder.InsertData(
                 table: "Produk",
                 columns: new[] { "Id", "Harga", "Nama", "Satuan", "Stok" },
@@ -161,9 +184,19 @@ namespace Salon.Shared.Migrations
                 column: "IdLayanan");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DetailLayanan_IdTransaksi",
+                table: "DetailLayanan",
+                column: "IdTransaksi");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DetailProduk_IdProduk",
                 table: "DetailProduk",
                 column: "IdProduk");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DetailProduk_IdTransaksi",
+                table: "DetailProduk",
+                column: "IdTransaksi");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transaksi_IdCustomer",
@@ -186,13 +219,13 @@ namespace Salon.Shared.Migrations
                 name: "DetailProduk");
 
             migrationBuilder.DropTable(
-                name: "Transaksi");
-
-            migrationBuilder.DropTable(
                 name: "Layanan");
 
             migrationBuilder.DropTable(
                 name: "Produk");
+
+            migrationBuilder.DropTable(
+                name: "Transaksi");
 
             migrationBuilder.DropTable(
                 name: "Customer");

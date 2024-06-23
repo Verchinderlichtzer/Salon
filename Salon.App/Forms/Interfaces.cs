@@ -5,6 +5,11 @@ public interface ICustomerForm
     void ShowForm();
 }
 
+public interface ILaporanForm
+{
+    void ShowForm();
+}
+
 public interface ILayananForm
 {
     void ShowForm();
