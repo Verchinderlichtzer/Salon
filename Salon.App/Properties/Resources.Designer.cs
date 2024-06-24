@@ -73,6 +73,16 @@ namespace Salon.App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap daftar_transaksi {
+            get {
+                object obj = ResourceManager.GetObject("daftar_transaksi", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap dua {
             get {
                 object obj = ResourceManager.GetObject("dua", resourceCulture);

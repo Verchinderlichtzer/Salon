@@ -103,7 +103,6 @@ public class TransaksiRepository(AppDbContext appDbContext) : ITransaksiReposito
                 model.Tanggal = transaksi.Tanggal;
                 model.BiayaProduk = transaksi.BiayaProduk;
                 model.BiayaLayanan = transaksi.BiayaLayanan;
-                model.TotalBiaya = transaksi.TotalBiaya;
                 model.Bayar = transaksi.Bayar;
             }
             int result = await appDbContext.SaveChangesAsync();

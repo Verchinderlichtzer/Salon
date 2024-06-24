@@ -55,15 +55,15 @@ public class AppDbContext : DbContext
 
         #region Data Initializer
 
-        //modelBuilder.Entity<User>().HasData(
-        //new User
-        //{
-        //    Id = "sujudihanif36@gmail.com",
-        //    Password = "IvCkErOjG9A8DPW7X23rJg==",
-        //    Nama = "Sujudi Hanif",
-        //    JenisKelamin = JenisKelamin.Pria,
-        //    Telepon = "085739194810"
-        //});
+        modelBuilder.Entity<User>().HasData(
+        new User
+        {
+            Id = "Admin",
+            Password = "3jqbFvenDDp2g3HTQ6ABlw==",
+            Nama = "Rosma Nelli",
+            JenisKelamin = JenisKelamin.Wanita,
+            Telepon = "083665519043"
+        });
 
         modelBuilder.Entity<Customer>().HasData(
         new Customer
@@ -113,6 +113,64 @@ public class AppDbContext : DbContext
             Nama = "Pemutih Wajah",
             Satuan = "Cepuk",
             Harga = 15000
+        },
+        new Produk
+        {
+            Id = "P-0005",
+            Nama = "Masker Wajah",
+            Satuan = "Botol",
+            Harga = 20000
+        },
+        new Produk
+        {
+            Id = "P-0006",
+            Nama = "Creambath",
+            Satuan = "Botol",
+            Harga = 51000
+        });
+
+        modelBuilder.Entity<Layanan>().HasData(
+        new Layanan
+        {
+            Id = "L-001",
+            Nama = "Cukur",
+            Tarif = 23000
+        },
+        new Layanan
+        {
+            Id = "L-002",
+            Nama = "Smoothing",
+            Tarif = 150000
+        },
+        new Layanan
+        {
+            Id = "L-003",
+            Nama = "Coloring",
+            Tarif = 150000
+        },
+        new Layanan
+        {
+            Id = "L-004",
+            Nama = "Rebonding",
+            Tarif = 135000
+        },
+        new Layanan
+        {
+            Id = "L-005",
+            Nama = "Catok",
+            Tarif = 31000
+        },
+        new Layanan
+        {
+            Id = "L-006",
+            Nama = "Blow",
+            Tarif = 31000
+        },
+        new Layanan
+        {
+            Id = "L-007",
+            Nama = "Curly",
+            Tarif = 35000
         });
 
         #endregion Data Initializer

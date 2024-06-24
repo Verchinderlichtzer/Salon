@@ -43,6 +43,11 @@ public partial class FDashboard : Form
         _layananForm.ShowForm();
     }
 
+    private void btnDaftarTransaksi_Click(object sender, EventArgs e)
+    {
+
+    }
+
     private void btnTransaksi_Click(object sender, EventArgs e)
     {
         _transaksiForm.ShowForm();

@@ -28,6 +28,7 @@ partial class FLayanan
     /// </summary>
     private void InitializeComponent()
     {
+        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
         panel1 = new Panel();
         label6 = new Label();
         cID = new TextBox();
@@ -77,7 +78,7 @@ partial class FLayanan
         cID.Location = new Point(67, 12);
         cID.Name = "cID";
         cID.Size = new Size(100, 23);
-        cID.TabIndex = 6;
+        cID.TabIndex = 0;
         // 
         // label4
         // 
@@ -102,14 +103,14 @@ partial class FLayanan
         cTarif.Location = new Point(67, 73);
         cTarif.Name = "cTarif";
         cTarif.Size = new Size(145, 23);
-        cTarif.TabIndex = 1;
+        cTarif.TabIndex = 2;
         // 
         // cNama
         // 
         cNama.Location = new Point(67, 44);
         cNama.Name = "cNama";
         cNama.Size = new Size(211, 23);
-        cNama.TabIndex = 0;
+        cNama.TabIndex = 1;
         // 
         // panel2
         // 
@@ -127,6 +128,7 @@ partial class FLayanan
         btnRefresh.BackColor = Color.Gray;
         btnRefresh.FlatAppearance.BorderSize = 0;
         btnRefresh.FlatStyle = FlatStyle.Flat;
+        btnRefresh.Font = new Font("Segoe UI", 12F);
         btnRefresh.Location = new Point(524, 6);
         btnRefresh.Name = "btnRefresh";
         btnRefresh.Size = new Size(252, 32);
@@ -140,6 +142,7 @@ partial class FLayanan
         btnSimpan.BackColor = Color.LimeGreen;
         btnSimpan.FlatAppearance.BorderSize = 0;
         btnSimpan.FlatStyle = FlatStyle.Flat;
+        btnSimpan.Font = new Font("Segoe UI", 12F);
         btnSimpan.Location = new Point(8, 6);
         btnSimpan.Name = "btnSimpan";
         btnSimpan.Size = new Size(252, 32);
@@ -154,6 +157,7 @@ partial class FLayanan
         btnHapus.Enabled = false;
         btnHapus.FlatAppearance.BorderSize = 0;
         btnHapus.FlatStyle = FlatStyle.Flat;
+        btnHapus.Font = new Font("Segoe UI", 12F);
         btnHapus.Location = new Point(266, 6);
         btnHapus.Name = "btnHapus";
         btnHapus.Size = new Size(252, 32);
@@ -187,10 +191,19 @@ partial class FLayanan
         dgv.AllowUserToDeleteRows = false;
         dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgv.BorderStyle = BorderStyle.None;
+        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dataGridViewCellStyle1.BackColor = SystemColors.Control;
+        dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+        dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+        dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+        dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
         dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgv.Location = new Point(3, 35);
         dgv.Name = "dgv";
         dgv.ReadOnly = true;
+        dgv.RowHeadersVisible = false;
         dgv.Size = new Size(778, 367);
         dgv.TabIndex = 3;
         dgv.CellClick += dgv_CellClick;

@@ -1,4 +1,6 @@
-﻿namespace Salon.App.Forms;
+﻿using System.Windows.Forms;
+
+namespace Salon.App.Forms;
 public partial class FCustomer : Form, ICustomerForm
 {
     private readonly ICustomerRepository _customerRepository;
@@ -21,11 +23,15 @@ public partial class FCustomer : Form, ICustomerForm
         await RefreshDGV();
 
         dgv.Columns[0].Width = 58;
+        dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         dgv.Columns[1].Width = 133;
         dgv.Columns[2].Width = 102;
+        dgv.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         dgv.Columns[3].Width = 102;
+        dgv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         dgv.Columns[4].Width = 240;
         dgv.Columns[5].Width = 99;
+        dgv.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         dgv.Columns["TanggalLahir"].HeaderText = "Tanggal Lahir";
         dgv.Columns["JenisKelamin"].HeaderText = "Jenis Kelamin";
         dgv.Columns["TanggalLahir"].DefaultCellStyle.Format = "dd MMM yyyy";
@@ -39,7 +45,7 @@ public partial class FCustomer : Form, ICustomerForm
                 Form yang wajib diisi :
                 1. Nama
                 2. Jenis Kelamin
-                2. Tanggal Lahir
+                3. Tanggal Lahir
                 """, "Data Belum Lengkap", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             return;
         }

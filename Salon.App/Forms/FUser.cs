@@ -4,6 +4,7 @@ namespace Salon.App.Forms;
 public partial class FUser : Form, IUserForm
 {
     private readonly IUserRepository _userRepository;
+    private bool _isNew = true;
 
     public FUser(IUserRepository userRepository)
     {
@@ -23,11 +24,16 @@ public partial class FUser : Form, IUserForm
         cJenisUser.SelectedItem = "Karyawan";
         await RefreshDGV();
 
-        dgv.Columns[0].Width = 58;
-        dgv.Columns[1].Width = 133;
-        dgv.Columns[2].Width = 102;
-        dgv.Columns[3].Width = 102;
-        dgv.Columns[4].Width = 240;
+        dgv.Columns[0].Width = 127;
+        dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dgv.Columns[1].Visible = false;
+        dgv.Columns[2].Width = 285;
+        dgv.Columns[3].Width = 105;
+        dgv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dgv.Columns[4].Width = 116;
+        dgv.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dgv.Columns[5].Width = 104;
+        dgv.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         dgv.Columns["JenisUser"].HeaderText = "Jenis User";
         dgv.Columns["JenisKelamin"].HeaderText = "Jenis Kelamin";
     }
@@ -40,14 +46,16 @@ public partial class FUser : Form, IUserForm
                 Form yang wajib diisi :
                 1. Nama
                 2. Password
-                2. Tanggal Lahir
+                3. Telepon
+                4. Jenis Kelamin
                 """, "Data Belum Lengkap", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             return;
         }
-        if (string.IsNullOrEmpty(cID.Text))
+        if (_isNew)
         {
             bool result = await _userRepository.AddAsync(new()
             {
+                Id = cID.Text,
                 Nama = cNama.Text,
                 Password = cPassword.Text,
                 Telepon = cTelepon.Text,
@@ -77,6 +85,7 @@ public partial class FUser : Form, IUserForm
     private async void btnHapus_Click(object sender, EventArgs e)
     {
         var id = dgv.CurrentRow.Cells[0].Value.ToString();
+        if (id == "Admin") return;
         DialogResult dr = MessageBox.Show($"Hapus {id}?", "Konfirmasi hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         if (dr == DialogResult.Yes)
         {
@@ -89,6 +98,7 @@ public partial class FUser : Form, IUserForm
 
     private async void btnRefresh_Click(object sender, EventArgs e)
     {
+        _isNew = cID.Enabled = true;
         cID.Clear();
         cNama.Clear();
         cPassword.Clear();
@@ -112,7 +122,7 @@ public partial class FUser : Form, IUserForm
 
     private async void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
     {
-        cID.Text = dgv.CurrentRow.Cells[0].Value.ToString();
+        _isNew = cID.Enabled = false;
         var result = await _userRepository.FindAsync(cID.Text);
         cNama.Text = result.Nama;
         cTelepon.Text = result.Telepon;

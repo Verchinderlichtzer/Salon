@@ -101,10 +101,6 @@ public class UserRepository(AppDbContext appDbContext) : IUserRepository
     {
         try
         {
-            // 1 - User tidak ditemukan
-            // 2 - User pernah bertransaksi
-            // 3 - User pernah bertugas
-            // 4 - Ada kesalahan saat menghapus data
             User model = (await appDbContext.User.FirstOrDefaultAsync(x => x.Id == id))!;
             if (model != null)
             {

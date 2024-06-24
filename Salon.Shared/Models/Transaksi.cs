@@ -11,10 +11,9 @@ public class Transaksi
     public string IdUser { get; set; } = null!;
     public string IdCustomer { get; set; } = null!;
 
-    public DateTime Tanggal { get; set; } = DateTime.Today;
+    public DateTime Tanggal { get; set; } = DateTime.Now;
     public int BiayaProduk { get; set; }
     public int BiayaLayanan { get; set; }
-    public int TotalBiaya { get; set; }
     public int Bayar { get; set; }
 
     public User User { get; set; } = null!;
@@ -22,5 +21,6 @@ public class Transaksi
     public List<DetailLayanan> DetailLayanan { get; set; } = null!;
     public List<DetailProduk> DetailProduk { get; set; } = null!;
 
-    public int Kembali => Bayar - TotalBiaya;
+    //public int TotalBiaya => BiayaProduk + BiayaLayanan;
+    //public int Kembali => Bayar - TotalBiaya;
 }

@@ -83,7 +83,6 @@ namespace Salon.Shared.Migrations
                     Tanggal = table.Column<DateTime>(type: "TEXT", nullable: false),
                     BiayaProduk = table.Column<int>(type: "INTEGER", nullable: false),
                     BiayaLayanan = table.Column<int>(type: "INTEGER", nullable: false),
-                    TotalBiaya = table.Column<int>(type: "INTEGER", nullable: false),
                     Bayar = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -168,6 +167,20 @@ namespace Salon.Shared.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Layanan",
+                columns: new[] { "Id", "Nama", "Tarif" },
+                values: new object[,]
+                {
+                    { "L-001", "Cukur", 23000 },
+                    { "L-002", "Smoothing", 150000 },
+                    { "L-003", "Coloring", 150000 },
+                    { "L-004", "Rebonding", 135000 },
+                    { "L-005", "Catok", 31000 },
+                    { "L-006", "Blow", 31000 },
+                    { "L-007", "Curly", 35000 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Produk",
                 columns: new[] { "Id", "Harga", "Nama", "Satuan", "Stok" },
                 values: new object[,]
@@ -175,8 +188,15 @@ namespace Salon.Shared.Migrations
                     { "P-0001", 10000, "Wardah", "Pcs", 0 },
                     { "P-0002", 90000, "Purbasari", "Pcs", 0 },
                     { "P-0003", 20000, "Bedak Lulur", "Botol", 0 },
-                    { "P-0004", 15000, "Pemutih Wajah", "Cepuk", 0 }
+                    { "P-0004", 15000, "Pemutih Wajah", "Cepuk", 0 },
+                    { "P-0005", 20000, "Masker Wajah", "Botol", 0 },
+                    { "P-0006", 51000, "Creambath", "Botol", 0 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "JenisKelamin", "JenisUser", "Nama", "Password", "Telepon" },
+                values: new object[] { "Admin", (byte)2, (byte)0, "Rosma Nelli", "3jqbFvenDDp2g3HTQ6ABlw==", "083665519043" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DetailLayanan_IdLayanan",

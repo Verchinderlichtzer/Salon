@@ -28,6 +28,7 @@ partial class FCustomer
     /// </summary>
     private void InitializeComponent()
     {
+        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
         panel1 = new Panel();
         label6 = new Label();
         cID = new TextBox();
@@ -91,7 +92,7 @@ partial class FCustomer
         cID.Location = new Point(67, 12);
         cID.Name = "cID";
         cID.Size = new Size(100, 23);
-        cID.TabIndex = 6;
+        cID.TabIndex = 0;
         // 
         // label3
         // 
@@ -117,7 +118,7 @@ partial class FCustomer
         cWanita.Location = new Point(656, 42);
         cWanita.Name = "cWanita";
         cWanita.Size = new Size(62, 19);
-        cWanita.TabIndex = 4;
+        cWanita.TabIndex = 5;
         cWanita.TabStop = true;
         cWanita.Text = "Wanita";
         cWanita.UseVisualStyleBackColor = true;
@@ -137,7 +138,7 @@ partial class FCustomer
         cPria.Location = new Point(591, 42);
         cPria.Name = "cPria";
         cPria.Size = new Size(45, 19);
-        cPria.TabIndex = 3;
+        cPria.TabIndex = 4;
         cPria.TabStop = true;
         cPria.Text = "Pria";
         cPria.UseVisualStyleBackColor = true;
@@ -157,7 +158,7 @@ partial class FCustomer
         cTanggalLahir.Location = new Point(567, 70);
         cTanggalLahir.Name = "cTanggalLahir";
         cTanggalLahir.Size = new Size(200, 23);
-        cTanggalLahir.TabIndex = 5;
+        cTanggalLahir.TabIndex = 6;
         // 
         // label2
         // 
@@ -180,14 +181,14 @@ partial class FCustomer
         cAlamat.Location = new Point(67, 73);
         cAlamat.Name = "cAlamat";
         cAlamat.Size = new Size(383, 23);
-        cAlamat.TabIndex = 1;
+        cAlamat.TabIndex = 3;
         // 
         // cNama
         // 
         cNama.Location = new Point(67, 44);
         cNama.Name = "cNama";
         cNama.Size = new Size(211, 23);
-        cNama.TabIndex = 0;
+        cNama.TabIndex = 1;
         // 
         // panel2
         // 
@@ -205,6 +206,7 @@ partial class FCustomer
         btnRefresh.BackColor = Color.Gray;
         btnRefresh.FlatAppearance.BorderSize = 0;
         btnRefresh.FlatStyle = FlatStyle.Flat;
+        btnRefresh.Font = new Font("Segoe UI", 12F);
         btnRefresh.Location = new Point(524, 6);
         btnRefresh.Name = "btnRefresh";
         btnRefresh.Size = new Size(252, 32);
@@ -218,6 +220,7 @@ partial class FCustomer
         btnSimpan.BackColor = Color.LimeGreen;
         btnSimpan.FlatAppearance.BorderSize = 0;
         btnSimpan.FlatStyle = FlatStyle.Flat;
+        btnSimpan.Font = new Font("Segoe UI", 12F);
         btnSimpan.Location = new Point(8, 6);
         btnSimpan.Name = "btnSimpan";
         btnSimpan.Size = new Size(252, 32);
@@ -232,6 +235,7 @@ partial class FCustomer
         btnHapus.Enabled = false;
         btnHapus.FlatAppearance.BorderSize = 0;
         btnHapus.FlatStyle = FlatStyle.Flat;
+        btnHapus.Font = new Font("Segoe UI", 12F);
         btnHapus.Location = new Point(266, 6);
         btnHapus.Name = "btnHapus";
         btnHapus.Size = new Size(252, 32);
@@ -256,7 +260,7 @@ partial class FCustomer
         cCariCustomer.Name = "cCariCustomer";
         cCariCustomer.PlaceholderText = "Cari customer...";
         cCariCustomer.Size = new Size(778, 23);
-        cCariCustomer.TabIndex = 4;
+        cCariCustomer.TabIndex = 7;
         cCariCustomer.TextChanged += cCariCustomer_TextChanged;
         // 
         // dgv
@@ -265,12 +269,21 @@ partial class FCustomer
         dgv.AllowUserToDeleteRows = false;
         dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgv.BorderStyle = BorderStyle.None;
+        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dataGridViewCellStyle1.BackColor = SystemColors.Control;
+        dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+        dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+        dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+        dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
         dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgv.Location = new Point(3, 35);
         dgv.Name = "dgv";
         dgv.ReadOnly = true;
+        dgv.RowHeadersVisible = false;
         dgv.Size = new Size(778, 367);
-        dgv.TabIndex = 3;
+        dgv.TabIndex = 8;
         dgv.CellClick += dgv_CellClick;
         // 
         // FCustomer

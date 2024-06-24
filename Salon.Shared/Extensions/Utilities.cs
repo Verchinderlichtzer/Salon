@@ -302,6 +302,13 @@ public static partial class Utilities
         return string.Empty;
     }
 
+    /// <summary>1;,2cX3W4HD5f6./78 => 12345678</summary>
+    public static int GetNumber(string str)
+    {
+        string result = Regex.Replace(str, "[^0-9]", "");
+        return int.Parse(result);
+    }
+
     #endregion Number Utility
 
     #region Boolean Utility

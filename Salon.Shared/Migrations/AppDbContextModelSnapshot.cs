@@ -134,6 +134,50 @@ namespace Salon.Shared.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Layanan");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "L-001",
+                            Nama = "Cukur",
+                            Tarif = 23000
+                        },
+                        new
+                        {
+                            Id = "L-002",
+                            Nama = "Smoothing",
+                            Tarif = 150000
+                        },
+                        new
+                        {
+                            Id = "L-003",
+                            Nama = "Coloring",
+                            Tarif = 150000
+                        },
+                        new
+                        {
+                            Id = "L-004",
+                            Nama = "Rebonding",
+                            Tarif = 135000
+                        },
+                        new
+                        {
+                            Id = "L-005",
+                            Nama = "Catok",
+                            Tarif = 31000
+                        },
+                        new
+                        {
+                            Id = "L-006",
+                            Nama = "Blow",
+                            Tarif = 31000
+                        },
+                        new
+                        {
+                            Id = "L-007",
+                            Nama = "Curly",
+                            Tarif = 35000
+                        });
                 });
 
             modelBuilder.Entity("Salon.Shared.Models.Produk", b =>
@@ -191,6 +235,22 @@ namespace Salon.Shared.Migrations
                             Nama = "Pemutih Wajah",
                             Satuan = "Cepuk",
                             Stok = 0
+                        },
+                        new
+                        {
+                            Id = "P-0005",
+                            Harga = 20000,
+                            Nama = "Masker Wajah",
+                            Satuan = "Botol",
+                            Stok = 0
+                        },
+                        new
+                        {
+                            Id = "P-0006",
+                            Harga = 51000,
+                            Nama = "Creambath",
+                            Satuan = "Botol",
+                            Stok = 0
                         });
                 });
 
@@ -218,9 +278,6 @@ namespace Salon.Shared.Migrations
 
                     b.Property<DateTime>("Tanggal")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("TotalBiaya")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -257,6 +314,17 @@ namespace Salon.Shared.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "Admin",
+                            JenisKelamin = (byte)2,
+                            JenisUser = (byte)0,
+                            Nama = "Rosma Nelli",
+                            Password = "3jqbFvenDDp2g3HTQ6ABlw==",
+                            Telepon = "083665519043"
+                        });
                 });
 
             modelBuilder.Entity("Salon.Shared.Models.DetailLayanan", b =>

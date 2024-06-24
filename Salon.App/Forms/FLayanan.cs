@@ -21,8 +21,10 @@ public partial class FLayanan : Form, ILayananForm
         await RefreshDGV();
 
         dgv.Columns[0].Width = 58;
+        dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         dgv.Columns[1].Width = 400;
-        dgv.Columns[2].DefaultCellStyle.Format = "C0";
+        dgv.Columns[2].DefaultCellStyle.Format = "N0";
+        dgv.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
     }
 
     private async void btnSimpan_Click(object sender, EventArgs e)
