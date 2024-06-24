@@ -20,6 +20,11 @@ public interface IProdukForm
     void ShowForm();
 }
 
+public interface IDaftarTransaksiForm
+{
+    void ShowForm();
+}
+
 public interface ITransaksiForm
 {
     void ShowForm();
@@ -29,8 +34,3 @@ public interface IUserForm
 {
     void ShowForm();
 }
-
-//public interface ICustomerForm
-//{
-//    void ShowForm();
-//}

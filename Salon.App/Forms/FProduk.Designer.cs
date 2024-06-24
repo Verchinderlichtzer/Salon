@@ -28,16 +28,14 @@ partial class FProduk
     /// </summary>
     private void InitializeComponent()
     {
-        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
         panel1 = new Panel();
         cSatuan = new ComboBox();
-        cStok = new TextBox();
         label6 = new Label();
         cID = new TextBox();
         label4 = new Label();
         label1 = new Label();
         label5 = new Label();
-        label2 = new Label();
         cHarga = new TextBox();
         cNama = new TextBox();
         panel2 = new Panel();
@@ -56,13 +54,11 @@ partial class FProduk
         // panel1
         // 
         panel1.Controls.Add(cSatuan);
-        panel1.Controls.Add(cStok);
         panel1.Controls.Add(label6);
         panel1.Controls.Add(cID);
         panel1.Controls.Add(label4);
         panel1.Controls.Add(label1);
         panel1.Controls.Add(label5);
-        panel1.Controls.Add(label2);
         panel1.Controls.Add(cHarga);
         panel1.Controls.Add(cNama);
         panel1.Dock = DockStyle.Top;
@@ -78,13 +74,6 @@ partial class FProduk
         cSatuan.Name = "cSatuan";
         cSatuan.Size = new Size(148, 23);
         cSatuan.TabIndex = 2;
-        // 
-        // cStok
-        // 
-        cStok.Location = new Point(608, 73);
-        cStok.Name = "cStok";
-        cStok.Size = new Size(49, 23);
-        cStok.TabIndex = 4;
         // 
         // label6
         // 
@@ -106,7 +95,7 @@ partial class FProduk
         // label4
         // 
         label4.AutoSize = true;
-        label4.Location = new Point(553, 47);
+        label4.Location = new Point(267, 76);
         label4.Name = "label4";
         label4.Size = new Size(39, 15);
         label4.TabIndex = 3;
@@ -130,18 +119,9 @@ partial class FProduk
         label5.TabIndex = 4;
         label5.Text = "Satuan";
         // 
-        // label2
-        // 
-        label2.AutoSize = true;
-        label2.Location = new Point(553, 76);
-        label2.Name = "label2";
-        label2.Size = new Size(30, 15);
-        label2.TabIndex = 1;
-        label2.Text = "Stok";
-        // 
         // cHarga
         // 
-        cHarga.Location = new Point(608, 44);
+        cHarga.Location = new Point(322, 73);
         cHarga.Name = "cHarga";
         cHarga.Size = new Size(120, 23);
         cHarga.TabIndex = 3;
@@ -232,14 +212,14 @@ partial class FProduk
         dgv.AllowUserToDeleteRows = false;
         dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgv.BorderStyle = BorderStyle.None;
-        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        dataGridViewCellStyle1.BackColor = SystemColors.Control;
-        dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-        dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-        dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-        dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dataGridViewCellStyle2.BackColor = SystemColors.Control;
+        dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+        dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+        dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+        dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
         dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgv.Location = new Point(3, 35);
         dgv.Name = "dgv";
@@ -282,7 +262,6 @@ partial class FProduk
     private Label label4;
     private Label label1;
     private Label label5;
-    private Label label2;
     private DataGridView dgv;
     private Button btnRefresh;
     private Button btnHapus;
@@ -290,7 +269,6 @@ partial class FProduk
     private TextBox cCariProduk;
     private Label label6;
     private TextBox cID;
-    private TextBox cStok;
     private ComboBox cSatuan;
     private TextBox cNama;
 }

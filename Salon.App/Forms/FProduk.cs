@@ -30,7 +30,7 @@ public partial class FProduk : Form, IProdukForm
         dgv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         dgv.Columns[3].DefaultCellStyle.Format = "N0";
         dgv.Columns[4].Width = 78;
-        dgv.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dgv.Columns[4].Visible = false;
     }
 
     private async void btnSimpan_Click(object sender, EventArgs e)
@@ -51,8 +51,7 @@ public partial class FProduk : Form, IProdukForm
             {
                 Nama = cNama.Text,
                 Satuan = cSatuan.Text,
-                Harga = ToInt(cHarga.Text),
-                Stok = ToInt(cStok.Text)
+                Harga = ToInt(cHarga.Text)
             });
             if (!result)
                 MessageBox.Show("Produk gagal ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -64,8 +63,7 @@ public partial class FProduk : Form, IProdukForm
                 Id = cID.Text,
                 Nama = cNama.Text,
                 Satuan = cSatuan.Text,
-                Harga = ToInt(cHarga.Text),
-                Stok = ToInt(cStok.Text)
+                Harga = ToInt(cHarga.Text)
             });
             if (!result)
                 MessageBox.Show("Produk gagal diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -92,7 +90,6 @@ public partial class FProduk : Form, IProdukForm
         cNama.Clear();
         cHarga.Clear();
         cSatuan.Text = "";
-        cStok.Clear();
         cCariProduk.Clear();
         await RefreshDGV();
 
@@ -117,7 +114,6 @@ public partial class FProduk : Form, IProdukForm
         cNama.Text = result.Nama;
         cSatuan.Text = result.Satuan;
         cHarga.Text = result.Harga.ToString();
-        cStok.Text = result.Stok.ToString();
 
         btnSimpan.Text = "Ubah";
         btnSimpan.BackColor = Color.Gold;

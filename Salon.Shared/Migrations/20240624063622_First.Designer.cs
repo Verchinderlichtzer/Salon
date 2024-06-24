@@ -11,7 +11,7 @@ using Salon.Shared;
 namespace Salon.Shared.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240623210033_First")]
+    [Migration("20240624063622_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -199,9 +199,6 @@ namespace Salon.Shared.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Stok")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
 
                     b.ToTable("Produk");
@@ -212,48 +209,42 @@ namespace Salon.Shared.Migrations
                             Id = "P-0001",
                             Harga = 10000,
                             Nama = "Wardah",
-                            Satuan = "Pcs",
-                            Stok = 0
+                            Satuan = "Pcs"
                         },
                         new
                         {
                             Id = "P-0002",
                             Harga = 90000,
                             Nama = "Purbasari",
-                            Satuan = "Pcs",
-                            Stok = 0
+                            Satuan = "Pcs"
                         },
                         new
                         {
                             Id = "P-0003",
                             Harga = 20000,
                             Nama = "Bedak Lulur",
-                            Satuan = "Botol",
-                            Stok = 0
+                            Satuan = "Botol"
                         },
                         new
                         {
                             Id = "P-0004",
                             Harga = 15000,
                             Nama = "Pemutih Wajah",
-                            Satuan = "Cepuk",
-                            Stok = 0
+                            Satuan = "Cepuk"
                         },
                         new
                         {
                             Id = "P-0005",
                             Harga = 20000,
                             Nama = "Masker Wajah",
-                            Satuan = "Botol",
-                            Stok = 0
+                            Satuan = "Botol"
                         },
                         new
                         {
                             Id = "P-0006",
                             Harga = 51000,
                             Nama = "Creambath",
-                            Satuan = "Botol",
-                            Stok = 0
+                            Satuan = "Botol"
                         });
                 });
 

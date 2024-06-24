@@ -89,7 +89,6 @@ public class ProdukRepository(AppDbContext appDbContext) : IProdukRepository
                 model.Nama = produk.Nama;
                 model.Satuan = produk.Satuan;
                 model.Harga = produk.Harga;
-                model.Stok = produk.Stok;
             }
             int result = await appDbContext.SaveChangesAsync();
             return result > 0;

@@ -21,6 +21,6 @@ public class Transaksi
     public List<DetailLayanan> DetailLayanan { get; set; } = null!;
     public List<DetailProduk> DetailProduk { get; set; } = null!;
 
-    //public int TotalBiaya => BiayaProduk + BiayaLayanan;
-    //public int Kembali => Bayar - TotalBiaya;
+    public int TotalBiaya => BiayaProduk + BiayaLayanan;
+    public int Kembali => Bayar - TotalBiaya;
 }

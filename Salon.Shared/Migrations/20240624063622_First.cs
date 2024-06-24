@@ -49,8 +49,7 @@ namespace Salon.Shared.Migrations
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     Nama = table.Column<string>(type: "TEXT", nullable: false),
                     Satuan = table.Column<string>(type: "TEXT", nullable: false),
-                    Harga = table.Column<int>(type: "INTEGER", nullable: false),
-                    Stok = table.Column<int>(type: "INTEGER", nullable: false)
+                    Harga = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -182,15 +181,15 @@ namespace Salon.Shared.Migrations
 
             migrationBuilder.InsertData(
                 table: "Produk",
-                columns: new[] { "Id", "Harga", "Nama", "Satuan", "Stok" },
+                columns: new[] { "Id", "Harga", "Nama", "Satuan" },
                 values: new object[,]
                 {
-                    { "P-0001", 10000, "Wardah", "Pcs", 0 },
-                    { "P-0002", 90000, "Purbasari", "Pcs", 0 },
-                    { "P-0003", 20000, "Bedak Lulur", "Botol", 0 },
-                    { "P-0004", 15000, "Pemutih Wajah", "Cepuk", 0 },
-                    { "P-0005", 20000, "Masker Wajah", "Botol", 0 },
-                    { "P-0006", 51000, "Creambath", "Botol", 0 }
+                    { "P-0001", 10000, "Wardah", "Pcs" },
+                    { "P-0002", 90000, "Purbasari", "Pcs" },
+                    { "P-0003", 20000, "Bedak Lulur", "Botol" },
+                    { "P-0004", 15000, "Pemutih Wajah", "Cepuk" },
+                    { "P-0005", 20000, "Masker Wajah", "Botol" },
+                    { "P-0006", 51000, "Creambath", "Botol" }
                 });
 
             migrationBuilder.InsertData(

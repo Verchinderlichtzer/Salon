@@ -54,6 +54,7 @@ internal static class Program
                 services.AddTransient<ILaporanForm, FLaporan>();
                 services.AddTransient<ILayananForm, FLayanan>();
                 services.AddTransient<IProdukForm, FProduk>();
+                services.AddTransient<IDaftarTransaksiForm, FDaftarTransaksi>();
                 services.AddTransient<ITransaksiForm, FTransaksi>();
                 services.AddTransient<IUserForm, FUser>();
 
