@@ -59,11 +59,10 @@ public partial class FLaporan : Form, ILaporanForm
         report.LoadReportDefinition(reportDefinition);
         if (judul != ReportType.Grafik)
         {
-            foreach (var x in _parameters) report.SetParameters(x);
             report.SetParameters(new ReportParameter("Keterangan", filterText));
             report.DataSources.Add(new ReportDataSource($"DataSet{judul}", data));
         }
-        else
+        else if (judul == ReportType.Grafik)
         {
             report.SetParameters(new ReportParameter("Tahun", filterText));
             report.DataSources.Add(new ReportDataSource("DataSetGrafik", data));
@@ -196,22 +195,25 @@ public partial class FLaporan : Form, ILaporanForm
 
     private async void btnTransaksi_Click(object sender, EventArgs e)
     {
-        var data = (await _transaksiRepository.GetAsync([nameof(Customer)])).Select(x => new
+        var data = (await _transaksiRepository.GetAsync([nameof(Customer)])).Where(x => x.Tanggal.Date >= cDari.Value.Date && x.Tanggal.Date <= cSampai.Value.Date).Select(x => new
         {
             x.Id,
             Customer = x.Customer.Nama,
-            x.Tarif
+            x.Tanggal,
+            x.BiayaProduk,
+            x.BiayaLayanan,
+            x.Bayar
         });
         await GenerateReportAsync(ReportType.Transaksi, data);
     }
 
     private async void btnGrafik_Click(object sender, EventArgs e)
     {
-        var data = (await _transaksiRepository.GetAsync()).Select(x => new
+        var data = (await _transaksiRepository.GetAsync()).Where(x => x.Tanggal.Year == ToInt(cTahun.SelectedItem)).Select(x => new
         {
             x.Id,
-            x.Nama,
-            x.Tarif
+            x.Tanggal,
+            Nominal = x.TotalBiaya
         });
         await GenerateReportAsync(ReportType.Grafik, data);
     }
@@ -221,19 +223,30 @@ public partial class FLaporan : Form, ILaporanForm
         var data = (await _transaksiRepository.GetAsync([nameof(Customer)])).Select(x => new
         {
             x.Id,
-            x.Nama,
-            x.Tarif
+            NamaCustomer = x.Customer.Nama,
+            x.Tanggal,
+            x.BiayaProduk,
+            x.BiayaLayanan,
+            x.TotalBiaya
         });
         await GenerateReportAsync(ReportType.DetailTransaksi, data);
     }
 
     private async void btnTransaksiCustomer_Click(object sender, EventArgs e)
     {
-        var data = (await _customerRepository.GetAsync([nameof(Transaksi)])).Select(x => new
+        var data = (await _transaksiRepository.GetAsync([nameof(Customer)])).Select(x => new
         {
             x.Id,
-            x.Nama,
-            x.Tarif
+            x.Customer.Nama,
+            JenisKelamin = x.Customer.JenisKelamin.ToString(),
+            x.Customer.TanggalLahir,
+            x.Customer.Alamat,
+            x.Customer.Telepon,
+            IdTransaksi = x.Id,
+            x.Tanggal,
+            x.BiayaProduk,
+            x.BiayaLayanan,
+            x.TotalBiaya
         });
         await GenerateReportAsync(ReportType.TransaksiCustomer, data);
     }

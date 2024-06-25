@@ -18,8 +18,8 @@ public class Transaksi
 
     public User User { get; set; } = null!;
     public Customer Customer { get; set; } = null!;
-    public List<DetailLayanan> DetailLayanan { get; set; } = null!;
     public List<DetailProduk> DetailProduk { get; set; } = null!;
+    public List<DetailLayanan> DetailLayanan { get; set; } = null!;
 
     public int TotalBiaya => BiayaProduk + BiayaLayanan;
     public int Kembali => Bayar - TotalBiaya;

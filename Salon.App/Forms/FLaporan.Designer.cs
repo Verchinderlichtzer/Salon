@@ -51,10 +51,12 @@ partial class FLaporan
         cDari = new DateTimePicker();
         btnGrafik = new Button();
         btnTransaksi = new Button();
+        groupBox5 = new GroupBox();
         groupBox1.SuspendLayout();
         groupBox2.SuspendLayout();
         groupBox3.SuspendLayout();
         groupBox4.SuspendLayout();
+        groupBox5.SuspendLayout();
         SuspendLayout();
         // 
         // btnProduk
@@ -152,12 +154,9 @@ partial class FLaporan
         // 
         groupBox4.Controls.Add(label4);
         groupBox4.Controls.Add(label3);
-        groupBox4.Controls.Add(label2);
-        groupBox4.Controls.Add(cTahun);
         groupBox4.Controls.Add(label1);
         groupBox4.Controls.Add(cSampai);
         groupBox4.Controls.Add(cDari);
-        groupBox4.Controls.Add(btnGrafik);
         groupBox4.Controls.Add(btnTransaksi);
         resources.ApplyResources(groupBox4, "groupBox4");
         groupBox4.Name = "groupBox4";
@@ -218,10 +217,20 @@ partial class FLaporan
         btnTransaksi.UseVisualStyleBackColor = false;
         btnTransaksi.Click += btnTransaksi_Click;
         // 
+        // groupBox5
+        // 
+        groupBox5.Controls.Add(label2);
+        groupBox5.Controls.Add(btnGrafik);
+        groupBox5.Controls.Add(cTahun);
+        resources.ApplyResources(groupBox5, "groupBox5");
+        groupBox5.Name = "groupBox5";
+        groupBox5.TabStop = false;
+        // 
         // FLaporan
         // 
         resources.ApplyResources(this, "$this");
         AutoScaleMode = AutoScaleMode.Font;
+        Controls.Add(groupBox5);
         Controls.Add(groupBox4);
         Controls.Add(groupBox3);
         Controls.Add(groupBox2);
@@ -236,6 +245,8 @@ partial class FLaporan
         groupBox3.ResumeLayout(false);
         groupBox4.ResumeLayout(false);
         groupBox4.PerformLayout();
+        groupBox5.ResumeLayout(false);
+        groupBox5.PerformLayout();
         ResumeLayout(false);
     }
 
@@ -263,4 +274,5 @@ partial class FLaporan
     private ComboBox cTahun;
     private Label label1;
     private DateTimePicker cSampai;
+    private GroupBox groupBox5;
 }

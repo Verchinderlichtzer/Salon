@@ -11,6 +11,7 @@ public class DetailProduk
     public string IdTransaksi { get; set; } = null!;
     public string IdProduk { get; set; } = null!;
 
+    public int Harga { get; set; }
     public int Jumlah { get; set; }
     public int Total { get; set; }
 

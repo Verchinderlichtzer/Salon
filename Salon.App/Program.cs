@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System.Globalization;
 
 namespace Salon.App;
-
+//https://www.youtube.com/watch?v=yfPGFapabAY
 internal static class Program
 {
     /// <summary>
