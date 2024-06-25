@@ -1,4 +1,5 @@
 ﻿global using Salon.App.Forms;
+global using Salon.App.Reports;
 global using Salon.Shared.Extensions;
 global using Salon.Shared.Models;
 global using System.ComponentModel;

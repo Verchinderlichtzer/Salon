@@ -1,5 +1,5 @@
 ﻿namespace Salon.App.Forms;
-public partial class FDashboard : Form
+public partial class FDashboard : Form, IDashboardForm
 {
     private readonly ICustomerForm _customerForm;
     private readonly ILaporanForm _laporanForm;
@@ -20,6 +20,8 @@ public partial class FDashboard : Form
         _transaksiForm = transaksiForm;
         _userForm = userForm;
     }
+
+    public void ShowForm() => new FDashboard(_customerForm, _laporanForm, _layananForm, _produkForm, _daftarTransaksiForm, _transaksiForm, _userForm).Show();
 
     private void FDashboard_Load(object sender, EventArgs e)
     {
@@ -62,6 +64,8 @@ public partial class FDashboard : Form
 
     private void btnLogout_Click(object sender, EventArgs e)
     {
-
+        var form = Application.OpenForms.Cast<Form>().First(form => form.Name == "FLogin");
+        form.Show();
+        Hide();
     }
 }

@@ -39,12 +39,12 @@ partial class FDashboard
         groupBox3 = new GroupBox();
         btnLaporan = new Button();
         groupBox2 = new GroupBox();
+        btnDaftarTransaksi = new Button();
         btnTransaksi = new Button();
         groupBox1 = new GroupBox();
         btnLayanan = new Button();
         btnProduk = new Button();
         btnUser = new Button();
-        btnDaftarTransaksi = new Button();
         panel1.SuspendLayout();
         panel2.SuspendLayout();
         ((ISupportInitialize)pictureBox2).BeginInit();
@@ -186,6 +186,21 @@ partial class FDashboard
         groupBox2.TabStop = false;
         groupBox2.Text = "Transaksi";
         // 
+        // btnDaftarTransaksi
+        // 
+        btnDaftarTransaksi.FlatAppearance.BorderColor = Color.Gray;
+        btnDaftarTransaksi.FlatStyle = FlatStyle.Flat;
+        btnDaftarTransaksi.Font = new Font("Segoe UI", 9F);
+        btnDaftarTransaksi.Image = Properties.Resources.daftar_transaksi;
+        btnDaftarTransaksi.Location = new Point(6, 22);
+        btnDaftarTransaksi.Name = "btnDaftarTransaksi";
+        btnDaftarTransaksi.Size = new Size(100, 92);
+        btnDaftarTransaksi.TabIndex = 4;
+        btnDaftarTransaksi.Text = "Daftar Transaksi";
+        btnDaftarTransaksi.TextAlign = ContentAlignment.BottomCenter;
+        btnDaftarTransaksi.UseVisualStyleBackColor = true;
+        btnDaftarTransaksi.Click += btnDaftarTransaksi_Click;
+        // 
         // btnTransaksi
         // 
         btnTransaksi.FlatAppearance.BorderColor = Color.Gray;
@@ -256,21 +271,6 @@ partial class FDashboard
         btnUser.UseVisualStyleBackColor = true;
         btnUser.Click += btnUser_Click;
         // 
-        // btnDaftarTransaksi
-        // 
-        btnDaftarTransaksi.FlatAppearance.BorderColor = Color.Gray;
-        btnDaftarTransaksi.FlatStyle = FlatStyle.Flat;
-        btnDaftarTransaksi.Font = new Font("Segoe UI", 9F);
-        btnDaftarTransaksi.Image = Properties.Resources.daftar_transaksi;
-        btnDaftarTransaksi.Location = new Point(6, 22);
-        btnDaftarTransaksi.Name = "btnDaftarTransaksi";
-        btnDaftarTransaksi.Size = new Size(100, 92);
-        btnDaftarTransaksi.TabIndex = 4;
-        btnDaftarTransaksi.Text = "Daftar Transaksi";
-        btnDaftarTransaksi.TextAlign = ContentAlignment.BottomCenter;
-        btnDaftarTransaksi.UseVisualStyleBackColor = true;
-        btnDaftarTransaksi.Click += btnDaftarTransaksi_Click;
-        // 
         // FDashboard
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
@@ -278,6 +278,7 @@ partial class FDashboard
         ClientSize = new Size(1097, 621);
         Controls.Add(panel1);
         Name = "FDashboard";
+        StartPosition = FormStartPosition.CenterScreen;
         Text = "FDashboard";
         Load += FDashboard_Load;
         panel1.ResumeLayout(false);

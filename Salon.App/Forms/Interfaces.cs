@@ -1,5 +1,10 @@
 ﻿namespace Salon.App.Forms;
 
+public interface IDashboardForm
+{
+    void ShowForm();
+}
+
 public interface ICustomerForm
 {
     void ShowForm();

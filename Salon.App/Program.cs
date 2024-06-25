@@ -36,7 +36,7 @@ internal static class Program
 
         ServiceProvider = host.Services;
 
-        Application.Run(ServiceProvider.GetRequiredService<FDashboard>());
+        Application.Run(ServiceProvider.GetRequiredService<FLogin>());
     }
 
     public static IServiceProvider ServiceProvider { get; private set; } = null!;
@@ -48,7 +48,8 @@ internal static class Program
             {
                 services.AddDbContext<AppDbContext>(o => o.UseSqlite("Data Source=Salon.db"));
 
-                services.AddSingleton<FDashboard>();
+                services.AddSingleton<FLogin>();
+                services.AddTransient<IDashboardForm, FDashboard>();
 
                 services.AddTransient<ICustomerForm, FCustomer>();
                 services.AddTransient<ILaporanForm, FLaporan>();

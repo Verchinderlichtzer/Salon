@@ -13,6 +13,8 @@ public interface IUserRepository
 
     Task<User> FindAsync(string id, List<string> includes = null!);
 
+    Task<User> LoginAsync(string id, string password);
+
     Task<bool> AddAsync(User user);
 
     Task<bool> UpdateAsync(User user);
@@ -53,6 +55,20 @@ public class UserRepository(AppDbContext appDbContext) : IUserRepository
             }
 
             return (await model.FirstOrDefaultAsync(x => x.Id == id))!;
+        }
+        catch (Exception)
+        {
+            return null!;
+        }
+    }
+
+    public async Task<User> LoginAsync(string id, string password)
+    {
+        try
+        {
+            IQueryable<User> model = appDbContext.User;
+
+            return (await model.FirstOrDefaultAsync(x => x.Id == id && x.Password == Encrypt(password)))!;
         }
         catch (Exception)
         {
