@@ -39,7 +39,7 @@ public partial class FTransaksi : Form, ITransaksiForm
         cCustomer.SelectedItem = null;
         cDaftarProduk.SelectedItem = null;
         cDaftarLayanan.SelectedItem = null;
-        cTanggal.Text = DateTime.Now.ToString("dd MMMM yyyy HH:mm");
+        cTanggal.Value = DateTime.Today;
         _locked = false;
     }
 
@@ -79,7 +79,7 @@ public partial class FTransaksi : Form, ITransaksiForm
 
         Transaksi transaksi = await _transaksiRepository.FindAsync(idTransaksi, [nameof(Customer), nameof(Produk), nameof(Layanan)]);
         cCustomer.SelectedItem = $"{transaksi.Customer.Nama} — {transaksi.Customer.Id}";
-        cTanggal.Text = transaksi.Tanggal.ToString("dd MMMM yyyy");
+        cTanggal.Value = transaksi.Tanggal;
         cBayar.Text = transaksi.Bayar.ToString();
 
         dgvProduk.Rows.Clear();
@@ -140,6 +140,7 @@ public partial class FTransaksi : Form, ITransaksiForm
             {
                 IdUser = Global.IdUser,
                 IdCustomer = cCustomer.Text.Right(7),
+                Tanggal = cTanggal.Value + DateTime.Now.TimeOfDay,
                 BiayaProduk = GetNumber(lblBiayaProduk.Text),
                 BiayaLayanan = GetNumber(lblBiayaLayanan.Text),
                 Bayar = ToInt(cBayar.Text),
@@ -156,6 +157,7 @@ public partial class FTransaksi : Form, ITransaksiForm
                 Id = cID.SelectedItem!.ToString()!,
                 IdUser = Global.IdUser,
                 IdCustomer = cCustomer.Text.Right(7),
+                Tanggal = cTanggal.Value + DateTime.Now.TimeOfDay,
                 BiayaProduk = GetNumber(lblBiayaProduk.Text),
                 BiayaLayanan = GetNumber(lblBiayaLayanan.Text),
                 Bayar = ToInt(cBayar.Text),
@@ -187,7 +189,7 @@ public partial class FTransaksi : Form, ITransaksiForm
         await LoadData();
         cID.SelectedItem = null;
         cCustomer.SelectedItem = null;
-        cTanggal.Text = DateTime.Now.ToString("dd MMMM yyyy HH:mm");
+        cTanggal.Value = DateTime.Today;
         cTotalBiaya.Text = "Rp 0";
         cBayar.Clear();
         cKembali.Text = "Rp 0";

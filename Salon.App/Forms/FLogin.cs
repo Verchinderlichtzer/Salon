@@ -31,6 +31,8 @@ public partial class FLogin : Form
         if (user != null)
         {
             Global.IdUser = cID.Text;
+            Global.NamaUser = user.Nama;
+            Global.StatusUser = user.JenisUser.ToString();
             _dashboardForm.ShowForm();
             Hide();
         }
@@ -57,5 +59,6 @@ public partial class FLogin : Form
     {
         cID.Clear();
         cPassword.Clear();
+        ActiveControl = cID;
     }
 }

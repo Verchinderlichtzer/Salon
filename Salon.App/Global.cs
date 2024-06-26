@@ -7,5 +7,7 @@ using System.Threading.Tasks;
 namespace Salon.App;
 public static class Global
 {
-    public static string IdUser { get; set; } = "Admin";
+    public static string IdUser { get; set; } = "";
+    public static string NamaUser { get; set; } = "";
+    public static string StatusUser { get; set; } = "";
 }

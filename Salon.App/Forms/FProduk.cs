@@ -19,7 +19,9 @@ public partial class FProduk : Form, IProdukForm
     private async void FProduk_Load(object sender, EventArgs e)
     {
         await RefreshDGV();
-        cSatuan.Items.Add((await _produkRepository.GetAsync()).ConvertAll(x => x.Satuan));
+        var result = (await _produkRepository.GetAsync()).Select(x => x.Satuan).Distinct().Order();
+        cSatuan.Items.Clear();
+        foreach (var item in result) cSatuan.Items.Add(item);
 
         dgv.Columns[0].Width = 79;
         dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -29,8 +31,6 @@ public partial class FProduk : Form, IProdukForm
         dgv.Columns[3].Width = 97;
         dgv.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         dgv.Columns[3].DefaultCellStyle.Format = "N0";
-        dgv.Columns[4].Width = 78;
-        dgv.Columns[4].Visible = false;
     }
 
     private async void btnSimpan_Click(object sender, EventArgs e)
@@ -93,8 +93,9 @@ public partial class FProduk : Form, IProdukForm
         cCariProduk.Clear();
         await RefreshDGV();
 
+        var result = (await _produkRepository.GetAsync()).Select(x => x.Satuan).Distinct().Order();
         cSatuan.Items.Clear();
-        cSatuan.Items.Add((await _produkRepository.GetAsync()).ConvertAll(x => x.Satuan));
+        foreach (var item in result) cSatuan.Items.Add(item);
 
         btnSimpan.Text = "Simpan";
         btnSimpan.BackColor = Color.LimeGreen;

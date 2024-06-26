@@ -123,13 +123,13 @@ public partial class FUser : Form, IUserForm
     private async void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
     {
         _isNew = cID.Enabled = false;
+        cID.Text = dgv.CurrentRow.Cells[0].Value.ToString();
         var result = await _userRepository.FindAsync(cID.Text);
         cNama.Text = result.Nama;
         cTelepon.Text = result.Telepon;
-        cPassword.Text = result.Password;
         cPria.Checked = result.JenisKelamin == JenisKelamin.Pria;
         cWanita.Checked = result.JenisKelamin == JenisKelamin.Wanita;
-        cJenisUser.SelectedItem = result.JenisUser;
+        cJenisUser.SelectedItem = result.JenisUser.ToString();
 
         btnSimpan.Text = "Ubah";
         btnSimpan.BackColor = Color.Gold;

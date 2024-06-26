@@ -28,7 +28,7 @@ partial class FProduk
     /// </summary>
     private void InitializeComponent()
     {
-        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
         panel1 = new Panel();
         cSatuan = new ComboBox();
         label6 = new Label();
@@ -69,6 +69,8 @@ partial class FProduk
         // 
         // cSatuan
         // 
+        cSatuan.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+        cSatuan.AutoCompleteSource = AutoCompleteSource.ListItems;
         cSatuan.FormattingEnabled = true;
         cSatuan.Location = new Point(67, 73);
         cSatuan.Name = "cSatuan";
@@ -212,14 +214,14 @@ partial class FProduk
         dgv.AllowUserToDeleteRows = false;
         dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgv.BorderStyle = BorderStyle.None;
-        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        dataGridViewCellStyle2.BackColor = SystemColors.Control;
-        dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-        dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-        dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-        dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dataGridViewCellStyle1.BackColor = SystemColors.Control;
+        dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+        dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+        dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+        dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
         dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgv.Location = new Point(3, 35);
         dgv.Name = "dgv";

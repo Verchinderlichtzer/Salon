@@ -25,7 +25,7 @@ public partial class FLaporan : Form, ILaporanForm
         lbTransaksiCustomer.DataSource = (await _customerRepository.GetAsync()).Select(x => $"{x.Id} — {x.Nama}").Where(x => x.Search(cCariTransaksi.Text)).ToList();
 
         cTahun.Items.Clear();
-        for (int year = DateTime.Today.Year; year >= 2020; year--) cTahun.Items.Add(year);
+        for (int year = DateTime.Today.Year; year >= 2022; year--) cTahun.Items.Add(year);
     }
 
     private async void FLaporan_Load(object sender, EventArgs e)
@@ -35,6 +35,7 @@ public partial class FLaporan : Form, ILaporanForm
         cDari.Value = new DateTime(year, month, 1);
         cSampai.Value = new DateTime(year, month, last);
         await LoadData();
+        cTahun.SelectedItem = DateTime.Today.Year;
     }
 
     public void GenerateReport<T>(ReportType judul, IEnumerable<T> data, string filterText = "")

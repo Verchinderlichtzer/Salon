@@ -28,9 +28,9 @@ partial class FTransaksi
     /// </summary>
     private void InitializeComponent()
     {
-        DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
         panel1 = new Panel();
         cID = new ComboBox();
         label2 = new Label();
@@ -43,7 +43,6 @@ partial class FTransaksi
         label1 = new Label();
         lblKembali = new Label();
         cKembali = new TextBox();
-        cTanggal = new TextBox();
         panel2 = new Panel();
         btnRefresh = new Button();
         btnSimpan = new Button();
@@ -67,6 +66,7 @@ partial class FTransaksi
         dgvProdukNama = new DataGridViewTextBoxColumn();
         dgvProdukJumlah = new DataGridViewTextBoxColumn();
         dgvProdukHarga = new DataGridViewTextBoxColumn();
+        cTanggal = new DateTimePicker();
         panel1.SuspendLayout();
         panel2.SuspendLayout();
         panel3.SuspendLayout();
@@ -78,6 +78,7 @@ partial class FTransaksi
         // 
         // panel1
         // 
+        panel1.Controls.Add(cTanggal);
         panel1.Controls.Add(cID);
         panel1.Controls.Add(label2);
         panel1.Controls.Add(label3);
@@ -89,7 +90,6 @@ partial class FTransaksi
         panel1.Controls.Add(label1);
         panel1.Controls.Add(lblKembali);
         panel1.Controls.Add(cKembali);
-        panel1.Controls.Add(cTanggal);
         panel1.Dock = DockStyle.Top;
         panel1.Location = new Point(0, 0);
         panel1.Name = "panel1";
@@ -196,14 +196,6 @@ partial class FTransaksi
         cKembali.Size = new Size(88, 23);
         cKembali.TabIndex = 4;
         cKembali.Text = "Rp 0";
-        // 
-        // cTanggal
-        // 
-        cTanggal.Location = new Point(81, 73);
-        cTanggal.Name = "cTanggal";
-        cTanggal.ReadOnly = true;
-        cTanggal.Size = new Size(189, 23);
-        cTanggal.TabIndex = 1;
         // 
         // panel2
         // 
@@ -371,14 +363,14 @@ partial class FTransaksi
         dgvLayanan.AllowUserToDeleteRows = false;
         dgvLayanan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgvLayanan.BorderStyle = BorderStyle.None;
-        dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        dataGridViewCellStyle4.BackColor = SystemColors.Control;
-        dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
-        dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-        dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-        dgvLayanan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dataGridViewCellStyle1.BackColor = SystemColors.Control;
+        dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+        dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+        dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+        dgvLayanan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
         dgvLayanan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgvLayanan.Columns.AddRange(new DataGridViewColumn[] { dgvLayananId, dgvLayananNama, dgvLayananTarif });
         dgvLayanan.Location = new Point(496, 71);
@@ -407,8 +399,8 @@ partial class FTransaksi
         // 
         // dgvLayananTarif
         // 
-        dataGridViewCellStyle5.Format = "N0";
-        dgvLayananTarif.DefaultCellStyle = dataGridViewCellStyle5;
+        dataGridViewCellStyle2.Format = "N0";
+        dgvLayananTarif.DefaultCellStyle = dataGridViewCellStyle2;
         dgvLayananTarif.FillWeight = 83F;
         dgvLayananTarif.HeaderText = "Tarif";
         dgvLayananTarif.Name = "dgvLayananTarif";
@@ -419,7 +411,7 @@ partial class FTransaksi
         dgvProduk.AllowUserToDeleteRows = false;
         dgvProduk.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgvProduk.BorderStyle = BorderStyle.None;
-        dgvProduk.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+        dgvProduk.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
         dgvProduk.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgvProduk.Columns.AddRange(new DataGridViewColumn[] { dgvProdukId, dgvProdukNama, dgvProdukJumlah, dgvProdukHarga });
         dgvProduk.Location = new Point(3, 71);
@@ -454,11 +446,18 @@ partial class FTransaksi
         // 
         // dgvProdukHarga
         // 
-        dataGridViewCellStyle6.Format = "N0";
-        dgvProdukHarga.DefaultCellStyle = dataGridViewCellStyle6;
+        dataGridViewCellStyle3.Format = "N0";
+        dgvProdukHarga.DefaultCellStyle = dataGridViewCellStyle3;
         dgvProdukHarga.FillWeight = 89F;
         dgvProdukHarga.HeaderText = "Harga";
         dgvProdukHarga.Name = "dgvProdukHarga";
+        // 
+        // cTanggal
+        // 
+        cTanggal.Location = new Point(81, 73);
+        cTanggal.Name = "cTanggal";
+        cTanggal.Size = new Size(254, 23);
+        cTanggal.TabIndex = 15;
         // 
         // FTransaksi
         // 
@@ -493,7 +492,6 @@ partial class FTransaksi
     private Panel panel2;
     private Panel panel3;
     private TextBox cKembali;
-    private TextBox cTanggal;
     private Label label1;
     private Label lblKembali;
     private DataGridView dgvProduk;
@@ -525,4 +523,5 @@ partial class FTransaksi
     private DataGridViewTextBoxColumn dgvProdukNama;
     private DataGridViewTextBoxColumn dgvProdukJumlah;
     private DataGridViewTextBoxColumn dgvProdukHarga;
+    private DateTimePicker cTanggal;
 }

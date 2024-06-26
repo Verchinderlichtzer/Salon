@@ -25,6 +25,11 @@ public partial class FDashboard : Form, IDashboardForm
 
     private void FDashboard_Load(object sender, EventArgs e)
     {
+        ssIdUser.Text = $"Id : {Global.IdUser}";
+        ssNamaUser.Text = $" |   Nama : {Global.NamaUser}   | ";
+        ssStatusUser.Text = $"Status : {Global.StatusUser}";
+
+        btnUser.Enabled = Global.StatusUser != "Karyawan";
     }
 
     private void btnUser_Click(object sender, EventArgs e)
@@ -67,5 +72,10 @@ public partial class FDashboard : Form, IDashboardForm
         var form = Application.OpenForms.Cast<Form>().First(form => form.Name == "FLogin");
         form.Show();
         Hide();
+    }
+
+    private void FDashboard_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        Application.ExitThread();
     }
 }

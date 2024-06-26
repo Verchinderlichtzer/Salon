@@ -45,6 +45,10 @@ partial class FDashboard
         btnLayanan = new Button();
         btnProduk = new Button();
         btnUser = new Button();
+        statusStrip1 = new StatusStrip();
+        ssIdUser = new ToolStripStatusLabel();
+        ssNamaUser = new ToolStripStatusLabel();
+        ssStatusUser = new ToolStripStatusLabel();
         panel1.SuspendLayout();
         panel2.SuspendLayout();
         ((ISupportInitialize)pictureBox2).BeginInit();
@@ -54,6 +58,7 @@ partial class FDashboard
         groupBox3.SuspendLayout();
         groupBox2.SuspendLayout();
         groupBox1.SuspendLayout();
+        statusStrip1.SuspendLayout();
         SuspendLayout();
         // 
         // btnCustomer
@@ -271,15 +276,44 @@ partial class FDashboard
         btnUser.UseVisualStyleBackColor = true;
         btnUser.Click += btnUser_Click;
         // 
+        // statusStrip1
+        // 
+        statusStrip1.Items.AddRange(new ToolStripItem[] { ssIdUser, ssNamaUser, ssStatusUser });
+        statusStrip1.Location = new Point(0, 599);
+        statusStrip1.Name = "statusStrip1";
+        statusStrip1.Size = new Size(1097, 22);
+        statusStrip1.TabIndex = 7;
+        statusStrip1.Text = "statusStrip1";
+        // 
+        // ssIdUser
+        // 
+        ssIdUser.Name = "ssIdUser";
+        ssIdUser.Size = new Size(118, 17);
+        ssIdUser.Text = "toolStripStatusLabel1";
+        // 
+        // ssNamaUser
+        // 
+        ssNamaUser.Name = "ssNamaUser";
+        ssNamaUser.Size = new Size(118, 17);
+        ssNamaUser.Text = "toolStripStatusLabel1";
+        // 
+        // ssStatusUser
+        // 
+        ssStatusUser.Name = "ssStatusUser";
+        ssStatusUser.Size = new Size(118, 17);
+        ssStatusUser.Text = "toolStripStatusLabel1";
+        // 
         // FDashboard
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(1097, 621);
+        Controls.Add(statusStrip1);
         Controls.Add(panel1);
         Name = "FDashboard";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "FDashboard";
+        FormClosing += FDashboard_FormClosing;
         Load += FDashboard_Load;
         panel1.ResumeLayout(false);
         panel2.ResumeLayout(false);
@@ -290,13 +324,15 @@ partial class FDashboard
         groupBox3.ResumeLayout(false);
         groupBox2.ResumeLayout(false);
         groupBox1.ResumeLayout(false);
+        statusStrip1.ResumeLayout(false);
+        statusStrip1.PerformLayout();
         ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion
     private Button btnCustomer;
     private Panel panel1;
-    private Panel panel2;
     private Panel panel3;
     private GroupBox groupBox4;
     private GroupBox groupBox3;
@@ -304,11 +340,16 @@ partial class FDashboard
     private GroupBox groupBox1;
     private Button btnUser;
     private Button btnTransaksi;
-    private PictureBox pictureBox1;
     private Button btnLogout;
     private Button btnLaporan;
     private Button btnLayanan;
     private Button btnProduk;
-    private PictureBox pictureBox2;
     private Button btnDaftarTransaksi;
+    private StatusStrip statusStrip1;
+    private Panel panel2;
+    private PictureBox pictureBox2;
+    private PictureBox pictureBox1;
+    private ToolStripStatusLabel ssIdUser;
+    private ToolStripStatusLabel ssNamaUser;
+    private ToolStripStatusLabel ssStatusUser;
 }
