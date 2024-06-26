@@ -11,7 +11,7 @@ using Salon.Shared;
 namespace Salon.Shared.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240624063622_First")]
+    [Migration("20240626113159_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -99,6 +99,9 @@ namespace Salon.Shared.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Harga")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("IdProduk")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -108,9 +111,6 @@ namespace Salon.Shared.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Jumlah")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Total")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

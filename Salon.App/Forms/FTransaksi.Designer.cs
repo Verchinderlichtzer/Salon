@@ -28,9 +28,9 @@ partial class FTransaksi
     /// </summary>
     private void InitializeComponent()
     {
-        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
         panel1 = new Panel();
         cID = new ComboBox();
         label2 = new Label();
@@ -371,14 +371,14 @@ partial class FTransaksi
         dgvLayanan.AllowUserToDeleteRows = false;
         dgvLayanan.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgvLayanan.BorderStyle = BorderStyle.None;
-        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-        dataGridViewCellStyle1.BackColor = SystemColors.Control;
-        dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-        dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-        dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-        dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-        dgvLayanan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+        dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dataGridViewCellStyle4.BackColor = SystemColors.Control;
+        dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
+        dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+        dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+        dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+        dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+        dgvLayanan.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
         dgvLayanan.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgvLayanan.Columns.AddRange(new DataGridViewColumn[] { dgvLayananId, dgvLayananNama, dgvLayananTarif });
         dgvLayanan.Location = new Point(496, 71);
@@ -407,8 +407,8 @@ partial class FTransaksi
         // 
         // dgvLayananTarif
         // 
-        dataGridViewCellStyle2.Format = "N0";
-        dgvLayananTarif.DefaultCellStyle = dataGridViewCellStyle2;
+        dataGridViewCellStyle5.Format = "N0";
+        dgvLayananTarif.DefaultCellStyle = dataGridViewCellStyle5;
         dgvLayananTarif.FillWeight = 83F;
         dgvLayananTarif.HeaderText = "Tarif";
         dgvLayananTarif.Name = "dgvLayananTarif";
@@ -419,7 +419,7 @@ partial class FTransaksi
         dgvProduk.AllowUserToDeleteRows = false;
         dgvProduk.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgvProduk.BorderStyle = BorderStyle.None;
-        dgvProduk.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+        dgvProduk.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
         dgvProduk.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dgvProduk.Columns.AddRange(new DataGridViewColumn[] { dgvProdukId, dgvProdukNama, dgvProdukJumlah, dgvProdukHarga });
         dgvProduk.Location = new Point(3, 71);
@@ -454,8 +454,8 @@ partial class FTransaksi
         // 
         // dgvProdukHarga
         // 
-        dataGridViewCellStyle3.Format = "N0";
-        dgvProdukHarga.DefaultCellStyle = dataGridViewCellStyle3;
+        dataGridViewCellStyle6.Format = "N0";
+        dgvProdukHarga.DefaultCellStyle = dataGridViewCellStyle6;
         dgvProdukHarga.FillWeight = 89F;
         dgvProdukHarga.HeaderText = "Harga";
         dgvProdukHarga.Name = "dgvProdukHarga";

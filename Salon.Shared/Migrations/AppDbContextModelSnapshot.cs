@@ -96,6 +96,9 @@ namespace Salon.Shared.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Harga")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("IdProduk")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -105,9 +108,6 @@ namespace Salon.Shared.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Jumlah")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Total")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

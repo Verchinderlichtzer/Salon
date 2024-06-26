@@ -35,10 +35,10 @@ public partial class FTransaksi : Form, ITransaksiForm
     private async void FTransaksi_Load(object sender, EventArgs e)
     {
         await LoadData();
-        cID.SelectedIndex = -1;
-        cCustomer.SelectedIndex = -1;
-        cDaftarProduk.SelectedIndex = -1;
-        cDaftarLayanan.SelectedIndex = -1;
+        cID.SelectedItem = null;
+        cCustomer.SelectedItem = null;
+        cDaftarProduk.SelectedItem = null;
+        cDaftarLayanan.SelectedItem = null;
         cTanggal.Text = DateTime.Now.ToString("dd MMMM yyyy HH:mm");
         _locked = false;
     }
@@ -65,6 +65,11 @@ public partial class FTransaksi : Form, ITransaksiForm
         cTotalBiaya.Text = "Rp " + (biayaProduk + biayaLayanan).ToString("N0");
         cKembali.Text = "Rp " + Math.Abs(ToInt(cBayar.Text) - (biayaProduk + biayaLayanan)).ToString("N0");
         lblKembali.Text = ToInt(cBayar.Text) >= (biayaProduk + biayaLayanan) ? "Kembali" : "Kurang";
+
+        if (lblKembali.Text == "Kurang")
+            lblKembali.ForeColor = Color.Firebrick;
+        else
+            lblKembali.ForeColor = Color.Black;
     }
 
     private async void cID_SelectedValueChanged(object sender, EventArgs e)
@@ -72,13 +77,21 @@ public partial class FTransaksi : Form, ITransaksiForm
         string idTransaksi = cID.SelectedItem?.ToString()!;
         if (string.IsNullOrEmpty(idTransaksi) || _locked) return;
 
-        Transaksi transaksi = await _transaksiRepository.FindAsync(idTransaksi, [nameof(Customer), nameof(DetailProduk), nameof(DetailLayanan)]);
-        cCustomer.SelectedValue = $"{transaksi.Customer.Nama} — {transaksi.Customer.Id}";
+        Transaksi transaksi = await _transaksiRepository.FindAsync(idTransaksi, [nameof(Customer), nameof(Produk), nameof(Layanan)]);
+        cCustomer.SelectedItem = $"{transaksi.Customer.Nama} — {transaksi.Customer.Id}";
         cTanggal.Text = transaksi.Tanggal.ToString("dd MMMM yyyy");
         cBayar.Text = transaksi.Bayar.ToString();
 
-        dgvProduk.DataSource = transaksi.DetailProduk;
-        dgvProduk.DataSource = transaksi.DetailLayanan;
+        dgvProduk.Rows.Clear();
+        dgvLayanan.Rows.Clear();
+        foreach (var dp in transaksi.DetailProduk)
+        {
+            dgvProduk.Rows.Add(dp.IdProduk, dp.Produk.Nama, dp.Jumlah, dp.Harga);
+        }
+        foreach (var dl in transaksi.DetailLayanan)
+        {
+            dgvLayanan.Rows.Add(dl.IdLayanan, dl.Layanan.Nama, dl.Tarif);
+        }
 
         Hitung();
 
@@ -99,6 +112,28 @@ public partial class FTransaksi : Form, ITransaksiForm
             """, "Data Belum Lengkap", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             return;
         }
+
+        List<DetailProduk> detailProdukList = [];
+        foreach (DataGridViewRow row in dgvProduk.Rows)
+        {
+            detailProdukList.Add(new()
+            {
+                IdProduk = row.Cells[0].Value.ToString()!,
+                Jumlah = ToInt(row.Cells[2].Value),
+                Harga = ToInt(row.Cells[3].Value)
+            });
+        }
+
+        List<DetailLayanan> detailLayananList = [];
+        foreach (DataGridViewRow row in dgvLayanan.Rows)
+        {
+            detailLayananList.Add(new()
+            {
+                IdLayanan = row.Cells[0].Value.ToString()!,
+                Tarif = ToInt(row.Cells[2].Value)
+            });
+        }
+
         if (_isNew)
         {
             bool result = await _transaksiRepository.AddAsync(new()
@@ -107,7 +142,9 @@ public partial class FTransaksi : Form, ITransaksiForm
                 IdCustomer = cCustomer.Text.Right(7),
                 BiayaProduk = GetNumber(lblBiayaProduk.Text),
                 BiayaLayanan = GetNumber(lblBiayaLayanan.Text),
-                Bayar = ToInt(cBayar.Text)
+                Bayar = ToInt(cBayar.Text),
+                DetailProduk = detailProdukList,
+                DetailLayanan = detailLayananList
             });
             if (!result)
                 MessageBox.Show("Transaksi gagal ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -116,12 +153,14 @@ public partial class FTransaksi : Form, ITransaksiForm
         {
             bool result = await _transaksiRepository.UpdateAsync(new()
             {
-                Id = cID.SelectedText,
+                Id = cID.SelectedItem!.ToString()!,
                 IdUser = Global.IdUser,
                 IdCustomer = cCustomer.Text.Right(7),
                 BiayaProduk = GetNumber(lblBiayaProduk.Text),
                 BiayaLayanan = GetNumber(lblBiayaLayanan.Text),
-                Bayar = ToInt(cBayar.Text)
+                Bayar = ToInt(cBayar.Text),
+                DetailProduk = detailProdukList,
+                DetailLayanan = detailLayananList
             });
             if (!result)
                 MessageBox.Show("Transaksi gagal diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -144,20 +183,21 @@ public partial class FTransaksi : Form, ITransaksiForm
 
     private async void btnRefresh_Click(object sender, EventArgs e)
     {
-        cID.SelectedIndex = -1;
-        cCustomer.SelectedIndex = -1;
+        _locked = true;
+        await LoadData();
+        cID.SelectedItem = null;
+        cCustomer.SelectedItem = null;
         cTanggal.Text = DateTime.Now.ToString("dd MMMM yyyy HH:mm");
         cTotalBiaya.Text = "Rp 0";
         cBayar.Clear();
         cKembali.Text = "Rp 0";
-        cDaftarProduk.SelectedIndex = -1;
-        cDaftarLayanan.SelectedIndex = -1;
-        await LoadData();
+        cDaftarProduk.SelectedItem = null;
+        cDaftarLayanan.SelectedItem = null;
         //46 - 290 - 59 - 89 ||| 47 - 354 - 83
         btnSimpan.Text = "Simpan";
         btnSimpan.BackColor = Color.LimeGreen;
         _isNew = true;
-        //Clipboard.SetText(string.Join(" - ", dgvProduk.Columns.Cast<DataGridViewColumn>().Select(c => c.Width).Concat(dgvLayanan.Columns.Cast<DataGridViewColumn>().Select(c => c.Width))));
+        _locked = false;
     }
 
     private async void cDaftarProduk_SelectedValueChanged(object sender, EventArgs e)

@@ -13,8 +13,9 @@ public class DetailProduk
 
     public int Harga { get; set; }
     public int Jumlah { get; set; }
-    public int Total { get; set; }
 
     public Produk Produk { get; set; } = null!;
     public Transaksi Transaksi { get; set; } = null!;
+
+    public int Total => Harga * Jumlah;
 }

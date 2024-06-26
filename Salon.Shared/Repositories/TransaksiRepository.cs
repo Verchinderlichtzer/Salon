@@ -85,6 +85,17 @@ public class TransaksiRepository(AppDbContext appDbContext) : ITransaksiReposito
         try
         {
             transaksi.Id = GenerateId("T", 2, transaksi.Tanggal, await appDbContext.Transaksi.Where(x => x.Tanggal.Date == transaksi.Tanggal.Date).Select(x => x.Id).ToListAsync());
+
+            foreach (var dp in transaksi.DetailProduk)
+            {
+                dp.IdTransaksi = transaksi.Id;
+            }
+
+            foreach (var dl in transaksi.DetailLayanan)
+            {
+                dl.IdTransaksi = transaksi.Id;
+            }
+
             var model = await appDbContext.Transaksi.AddAsync(transaksi);
             await appDbContext.DetailProduk.AddRangeAsync(transaksi.DetailProduk);
             await appDbContext.DetailLayanan.AddRangeAsync(transaksi.DetailLayanan);
@@ -101,7 +112,24 @@ public class TransaksiRepository(AppDbContext appDbContext) : ITransaksiReposito
     {
         try
         {
-            Transaksi model = (await appDbContext.Transaksi.FirstOrDefaultAsync(x => x.Id == transaksi.Id))!;
+            Transaksi model = (await appDbContext.Transaksi.Include(x => x.DetailProduk).Include(x => x.DetailLayanan).FirstOrDefaultAsync(x => x.Id == transaksi.Id))!;
+
+            foreach (var dp in transaksi.DetailProduk)
+            {
+                dp.IdTransaksi = transaksi.Id;
+            }
+
+            foreach (var dl in transaksi.DetailLayanan)
+            {
+                dl.IdTransaksi = transaksi.Id;
+            }
+
+            appDbContext.DetailProduk.RemoveRange(model.DetailProduk);
+            appDbContext.DetailLayanan.RemoveRange(model.DetailLayanan);
+
+            await appDbContext.DetailProduk.AddRangeAsync(transaksi.DetailProduk);
+            await appDbContext.DetailLayanan.AddRangeAsync(transaksi.DetailLayanan);
+
             if (model != null)
             {
                 model.IdUser = transaksi.IdUser;

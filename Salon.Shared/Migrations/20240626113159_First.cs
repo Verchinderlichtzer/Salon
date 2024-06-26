@@ -136,8 +136,8 @@ namespace Salon.Shared.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     IdTransaksi = table.Column<string>(type: "TEXT", nullable: false),
                     IdProduk = table.Column<string>(type: "TEXT", nullable: false),
-                    Jumlah = table.Column<int>(type: "INTEGER", nullable: false),
-                    Total = table.Column<int>(type: "INTEGER", nullable: false)
+                    Harga = table.Column<int>(type: "INTEGER", nullable: false),
+                    Jumlah = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
