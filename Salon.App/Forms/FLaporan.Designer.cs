@@ -41,22 +41,22 @@ partial class FLaporan
         btnLayanan = new Button();
         btnCustomer = new Button();
         groupBox3 = new GroupBox();
-        groupBox4 = new GroupBox();
+        gbTransaksi = new GroupBox();
         label4 = new Label();
         label3 = new Label();
-        label2 = new Label();
-        cTahun = new ComboBox();
         label1 = new Label();
         cSampai = new DateTimePicker();
         cDari = new DateTimePicker();
-        btnGrafik = new Button();
         btnTransaksi = new Button();
-        groupBox5 = new GroupBox();
+        label2 = new Label();
+        cTahun = new ComboBox();
+        btnGrafik = new Button();
+        gbGrafik = new GroupBox();
         groupBox1.SuspendLayout();
         groupBox2.SuspendLayout();
         groupBox3.SuspendLayout();
-        groupBox4.SuspendLayout();
-        groupBox5.SuspendLayout();
+        gbTransaksi.SuspendLayout();
+        gbGrafik.SuspendLayout();
         SuspendLayout();
         // 
         // btnProduk
@@ -150,17 +150,17 @@ partial class FLaporan
         groupBox3.Name = "groupBox3";
         groupBox3.TabStop = false;
         // 
-        // groupBox4
+        // gbTransaksi
         // 
-        groupBox4.Controls.Add(label4);
-        groupBox4.Controls.Add(label3);
-        groupBox4.Controls.Add(label1);
-        groupBox4.Controls.Add(cSampai);
-        groupBox4.Controls.Add(cDari);
-        groupBox4.Controls.Add(btnTransaksi);
-        resources.ApplyResources(groupBox4, "groupBox4");
-        groupBox4.Name = "groupBox4";
-        groupBox4.TabStop = false;
+        gbTransaksi.Controls.Add(label4);
+        gbTransaksi.Controls.Add(label3);
+        gbTransaksi.Controls.Add(label1);
+        gbTransaksi.Controls.Add(cSampai);
+        gbTransaksi.Controls.Add(cDari);
+        gbTransaksi.Controls.Add(btnTransaksi);
+        resources.ApplyResources(gbTransaksi, "gbTransaksi");
+        gbTransaksi.Name = "gbTransaksi";
+        gbTransaksi.TabStop = false;
         // 
         // label4
         // 
@@ -171,18 +171,6 @@ partial class FLaporan
         // 
         resources.ApplyResources(label3, "label3");
         label3.Name = "label3";
-        // 
-        // label2
-        // 
-        resources.ApplyResources(label2, "label2");
-        label2.Name = "label2";
-        // 
-        // cTahun
-        // 
-        cTahun.DropDownStyle = ComboBoxStyle.DropDownList;
-        cTahun.FormattingEnabled = true;
-        resources.ApplyResources(cTahun, "cTahun");
-        cTahun.Name = "cTahun";
         // 
         // label1
         // 
@@ -201,14 +189,6 @@ partial class FLaporan
         cDari.Format = DateTimePickerFormat.Custom;
         cDari.Name = "cDari";
         // 
-        // btnGrafik
-        // 
-        btnGrafik.BackColor = SystemColors.Control;
-        resources.ApplyResources(btnGrafik, "btnGrafik");
-        btnGrafik.Name = "btnGrafik";
-        btnGrafik.UseVisualStyleBackColor = false;
-        btnGrafik.Click += btnGrafik_Click;
-        // 
         // btnTransaksi
         // 
         btnTransaksi.BackColor = SystemColors.Control;
@@ -217,21 +197,41 @@ partial class FLaporan
         btnTransaksi.UseVisualStyleBackColor = false;
         btnTransaksi.Click += btnTransaksi_Click;
         // 
-        // groupBox5
+        // label2
         // 
-        groupBox5.Controls.Add(label2);
-        groupBox5.Controls.Add(btnGrafik);
-        groupBox5.Controls.Add(cTahun);
-        resources.ApplyResources(groupBox5, "groupBox5");
-        groupBox5.Name = "groupBox5";
-        groupBox5.TabStop = false;
+        resources.ApplyResources(label2, "label2");
+        label2.Name = "label2";
+        // 
+        // cTahun
+        // 
+        cTahun.DropDownStyle = ComboBoxStyle.DropDownList;
+        cTahun.FormattingEnabled = true;
+        resources.ApplyResources(cTahun, "cTahun");
+        cTahun.Name = "cTahun";
+        // 
+        // btnGrafik
+        // 
+        btnGrafik.BackColor = SystemColors.Control;
+        resources.ApplyResources(btnGrafik, "btnGrafik");
+        btnGrafik.Name = "btnGrafik";
+        btnGrafik.UseVisualStyleBackColor = false;
+        btnGrafik.Click += btnGrafik_Click;
+        // 
+        // gbGrafik
+        // 
+        gbGrafik.Controls.Add(label2);
+        gbGrafik.Controls.Add(btnGrafik);
+        gbGrafik.Controls.Add(cTahun);
+        resources.ApplyResources(gbGrafik, "gbGrafik");
+        gbGrafik.Name = "gbGrafik";
+        gbGrafik.TabStop = false;
         // 
         // FLaporan
         // 
         resources.ApplyResources(this, "$this");
         AutoScaleMode = AutoScaleMode.Font;
-        Controls.Add(groupBox5);
-        Controls.Add(groupBox4);
+        Controls.Add(gbGrafik);
+        Controls.Add(gbTransaksi);
         Controls.Add(groupBox3);
         Controls.Add(groupBox2);
         Controls.Add(groupBox1);
@@ -243,10 +243,10 @@ partial class FLaporan
         groupBox2.ResumeLayout(false);
         groupBox2.PerformLayout();
         groupBox3.ResumeLayout(false);
-        groupBox4.ResumeLayout(false);
-        groupBox4.PerformLayout();
-        groupBox5.ResumeLayout(false);
-        groupBox5.PerformLayout();
+        gbTransaksi.ResumeLayout(false);
+        gbTransaksi.PerformLayout();
+        gbGrafik.ResumeLayout(false);
+        gbGrafik.PerformLayout();
         ResumeLayout(false);
     }
 
@@ -260,7 +260,7 @@ partial class FLaporan
     private Button btnTransaksiCustomer;
     private Button btnLayanan;
     private Button btnCustomer;
-    private GroupBox groupBox4;
+    private GroupBox gbTransaksi;
     private Button btnGrafik;
     private Button btnTransaksi;
     private ListBox lbTransaksiCustomer;
@@ -274,5 +274,5 @@ partial class FLaporan
     private ComboBox cTahun;
     private Label label1;
     private DateTimePicker cSampai;
-    private GroupBox groupBox5;
+    private GroupBox gbGrafik;
 }

@@ -15,11 +15,35 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Reports\LaporanDetailTransaksi.rdlc" />
+    <None Remove="Reports\LaporanGrafik.rdlc" />
     <None Remove="Reports\LaporanMasterCustomer.rdlc" />
+    <None Remove="Reports\LaporanMasterLayanan.rdlc" />
+    <None Remove="Reports\LaporanMasterProduk.rdlc" />
+    <None Remove="Reports\LaporanTransaksi.rdlc" />
+    <None Remove="Reports\LaporanTransaksiCustomer.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Reports\LaporanDetailTransaksi.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LaporanGrafik.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\LaporanMasterCustomer.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LaporanMasterLayanan.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LaporanMasterProduk.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LaporanTransaksi.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LaporanTransaksiCustomer.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

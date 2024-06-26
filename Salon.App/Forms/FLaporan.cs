@@ -1,7 +1,4 @@
 ﻿using Microsoft.Reporting.WinForms;
-using Salon.Shared.Extensions;
-using Salon.Shared.Models;
-using System.IO;
 
 namespace Salon.App.Forms;
 public partial class FLaporan : Form, ILaporanForm
@@ -31,33 +28,21 @@ public partial class FLaporan : Form, ILaporanForm
         for (int year = DateTime.Today.Year; year >= 2020; year--) cTahun.Items.Add(year);
     }
 
-    private void FLaporan_Load(object sender, EventArgs e)
+    private async void FLaporan_Load(object sender, EventArgs e)
     {
         int year = DateTime.Today.Year, month = DateTime.Today.Month;
         int last = DateTime.DaysInMonth(year, month);
         cDari.Value = new DateTime(year, month, 1);
         cSampai.Value = new DateTime(year, month, last);
+        await LoadData();
     }
 
-    public void GenerateReport(LocalReport report)
+    public void GenerateReport<T>(ReportType judul, IEnumerable<T> data, string filterText = "")
     {
-        var items = new[] {
-            new Customer { Id = "1", Nama = "Namanyi", JenisKelamin = JenisKelamin.Wanita, Alamat = "Bekasi", Telepon = "0888554" },
-            new Customer { Id = "2", Nama = "Namanya", JenisKelamin = JenisKelamin.Pria, Alamat = "Bandung" }
-        };
-        var parameters = new[] { new ReportParameter("Title", "Invoice 4/2020") };
-        using var fs = new FileStream("Reports/LaporanMasterCustomer.rdlc", FileMode.Open);
-        report.LoadReportDefinition(fs);
-        report.DataSources.Add(new ReportDataSource("Items", items));
-        report.SetParameters(parameters);
-    }
-
-    public async Task GenerateReportAsync<T>(ReportType judul, IEnumerable<T> data, string filterText = "")
-    {
-        using Stream reportDefinition = new FileStream("Reports/LaporanMasterCustomer.rdlc", FileMode.Open);
+        using Stream reportDefinition = new FileStream($"Reports/Laporan{judul}.rdlc", FileMode.Open);
         LocalReport report = new();
         report.LoadReportDefinition(reportDefinition);
-        if (judul != ReportType.Grafik)
+        if (judul != ReportType.Grafik && judul != ReportType.DetailTransaksi)
         {
             report.SetParameters(new ReportParameter("Keterangan", filterText));
             report.DataSources.Add(new ReportDataSource($"DataSet{judul}", data));
@@ -67,88 +52,24 @@ public partial class FLaporan : Form, ILaporanForm
             report.SetParameters(new ReportParameter("Tahun", filterText));
             report.DataSources.Add(new ReportDataSource("DataSetGrafik", data));
         }
-        byte[] pdf = report.Render("PDF");
-        string fileName = $"Laporan {judul.ToString().SeparateByCase()} {DateTime.Now:dd-MM-yy hh.mm.ss tt}.pdf";
-
-        var cancellationTokenSource = new CancellationTokenSource();
-        var cancellationToken = cancellationTokenSource.Token;
-
-        using var stream = new MemoryStream(pdf);
-
-
-        // Assuming 'memoryStream' contains your PDF data
-        string documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        string outputPath = Path.Combine(documentsFolder, "output.pdf");
-
-        using (FileStream fileStream = new FileStream(outputPath, FileMode.Create))
+        else if (judul == ReportType.DetailTransaksi)
         {
-            stream.WriteTo(fileStream);
-        }
-    }
-
-    /*
-     public async Task GenerateReportAsync<T>(ReportType judul, IEnumerable<T> data, string filterText = "")
-    {
-        using Stream reportDefinition = await FileSystem.Current.OpenAppPackageFileAsync($"Reports/Laporan{judul}.rdlc");
-        LocalReport report = new();
-        report.LoadReportDefinition(reportDefinition);
-        if (judul != ReportType.GrafikBatang && judul != ReportType.GrafikGaris)
-        {
-            ParameterInfo(await ProfilPerusahaanRepository.GetAsync());
-            foreach (var x in _parameters) report.SetParameters(x);
             report.SetParameters(new ReportParameter("Keterangan", filterText));
-            report.DataSources.Add(new ReportDataSource($"DataSet{judul}", data));
-        }
-        else
-        {
-            report.SetParameters(new ReportParameter("Tahun", filterText));
-            report.DataSources.Add(new ReportDataSource("DataSetGrafik", data));
+            var aku = (IEnumerable<DetailTransaksiDTO>)data;
+            report.DataSources.Add(new ReportDataSource("DataSetDetailTransaksi", aku.Select(x => new {x.Id, x.NamaCustomer, x.Tanggal, x.BiayaProduk, x.BiayaLayanan, x.TotalBiaya})));
+            report.DataSources.Add(new ReportDataSource("DataSetDetailProduk", aku.First().DetailProdukDTO));
+            report.DataSources.Add(new ReportDataSource("DataSetDetailLayanan", aku.First().DetailLayananDTO));
         }
         byte[] pdf = report.Render("PDF");
         string fileName = $"Laporan {judul.ToString().SeparateByCase()} {DateTime.Now:dd-MM-yy hh.mm.ss tt}.pdf";
 
-        var cancellationTokenSource = new CancellationTokenSource();
-        var cancellationToken = cancellationTokenSource.Token;
-
         using var stream = new MemoryStream(pdf);
-        var fileSaverResult = await FileSaver.Default.SaveAsync(fileName, stream, cancellationToken);
-        if (fileSaverResult.IsSuccessful)
-        {
+        string documentsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        string outputPath = Path.Combine(documentsFolder, fileName);
 
-        }
-    }
-     */
-
-    private void bu_Click(object sender, EventArgs e)
-    {
-        if (_jenisLaporan.Key == ReportType.MasterProduk)
-        {
-            await LaporanMasterProdukAsync();
-        }
-        else if (_jenisLaporan.Key == ReportType.MasterCustomer)
-        {
-            await LaporanMasterCustomerAsync();
-        }
-        else if (_jenisLaporan.Key == ReportType.MasterLayanan)
-        {
-            await LaporanMasterLayananAsync();
-        }
-        else if (_jenisLaporan.Key == ReportType.Transaksi)
-        {
-            await LaporanTransaksiAsync();
-        }
-        else if (_jenisLaporan.Key == ReportType.Grafik)
-        {
-            await LaporanGrafikAsync();
-        }
-        else if (_jenisLaporan.Key == ReportType.EntitasTransaksi)
-        {
-            await LaporanEntitasTransaksiAsync();
-        }
-        else if (_jenisLaporan.Key == ReportType.EntitasCustomer)
-        {
-            await LaporanEntitasCustomerAsync();
-        }
+        using FileStream fileStream = new(outputPath, FileMode.Create);
+        stream.WriteTo(fileStream);
+        MessageBox.Show("Laporan berhasil dibuat", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private async void OnPencarianChanged(object sender, EventArgs e)
@@ -165,7 +86,7 @@ public partial class FLaporan : Form, ILaporanForm
             x.Satuan,
             x.Harga
         });
-        await GenerateReportAsync(ReportType.MasterProduk, data);
+        GenerateReport(ReportType.MasterProduk, data, "Laporan produk");
     }
 
     private async void btnCustomer_Click(object sender, EventArgs e)
@@ -179,7 +100,7 @@ public partial class FLaporan : Form, ILaporanForm
             x.Alamat,
             x.Telepon
         });
-        await GenerateReportAsync(ReportType.MasterCustomer, data);
+        GenerateReport(ReportType.MasterCustomer, data, "Laporan customer");
     }
 
     private async void btnLayanan_Click(object sender, EventArgs e)
@@ -190,7 +111,7 @@ public partial class FLaporan : Form, ILaporanForm
             x.Nama,
             x.Tarif
         });
-        await GenerateReportAsync(ReportType.MasterLayanan, data);
+        GenerateReport(ReportType.MasterLayanan, data, "Laporan layanan");
     }
 
     private async void btnTransaksi_Click(object sender, EventArgs e)
@@ -204,7 +125,7 @@ public partial class FLaporan : Form, ILaporanForm
             x.BiayaLayanan,
             x.Bayar
         });
-        await GenerateReportAsync(ReportType.Transaksi, data);
+        GenerateReport(ReportType.Transaksi, data, $"Laporan transaksi antara tanggal {cDari.Value:dd/MM/yyyy} sampai {cSampai.Value:dd/MM/yyyy}");
     }
 
     private async void btnGrafik_Click(object sender, EventArgs e)
@@ -215,26 +136,38 @@ public partial class FLaporan : Form, ILaporanForm
             x.Tanggal,
             Nominal = x.TotalBiaya
         });
-        await GenerateReportAsync(ReportType.Grafik, data);
+        GenerateReport(ReportType.Grafik, data, $"GRAFIK TAHUN {cTahun.SelectedItem}");
     }
 
     private async void btnDetailTransaksi_Click(object sender, EventArgs e)
     {
-        var data = (await _transaksiRepository.GetAsync([nameof(Customer)])).Select(x => new
+        var data = (await _transaksiRepository.GetAsync([nameof(Customer), nameof(Produk), nameof(Layanan)])).Where(x => x.Id == lbDetailTransaksi.SelectedItem!.ToString()).Select(x => new DetailTransaksiDTO
         {
-            x.Id,
+            Id = x.Id,
             NamaCustomer = x.Customer.Nama,
-            x.Tanggal,
-            x.BiayaProduk,
-            x.BiayaLayanan,
-            x.TotalBiaya
+            Tanggal = x.Tanggal,
+            BiayaProduk = x.BiayaProduk,
+            BiayaLayanan = x.BiayaLayanan,
+            TotalBiaya = x.TotalBiaya,
+            DetailProdukDTO = x.DetailProduk.ConvertAll(x => new DetailProdukDTO()
+            {
+                NamaProduk = x.Produk.Nama,
+                Harga = x.Harga,
+                Jumlah = x.Jumlah,
+                Total = x.Total
+            }),
+            DetailLayananDTO = x.DetailLayanan.ConvertAll(x => new DetailLayananDTO()
+            {
+                NamaLayanan = x.Layanan.Nama,
+                Tarif = x.Tarif
+            })
         });
-        await GenerateReportAsync(ReportType.DetailTransaksi, data);
+        GenerateReport(ReportType.DetailTransaksi, data, $"Laporan transaksi dengan id \"{lbDetailTransaksi.SelectedItem}\"");
     }
 
     private async void btnTransaksiCustomer_Click(object sender, EventArgs e)
     {
-        var data = (await _transaksiRepository.GetAsync([nameof(Customer)])).Select(x => new
+        var data = (await _transaksiRepository.GetAsync([nameof(Customer)])).Where(x => x.IdCustomer == lbTransaksiCustomer.SelectedItem!.ToString()).Select(x => new
         {
             x.Id,
             x.Customer.Nama,
@@ -248,7 +181,7 @@ public partial class FLaporan : Form, ILaporanForm
             x.BiayaLayanan,
             x.TotalBiaya
         });
-        await GenerateReportAsync(ReportType.TransaksiCustomer, data);
+        GenerateReport(ReportType.TransaksiCustomer, data, $"Laporan transaksi oleh customer \"{lbTransaksiCustomer.SelectedItem!.ToString()!.Mid(10)}\"");
     }
 
     #region Enums

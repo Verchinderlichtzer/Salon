@@ -43,7 +43,9 @@ public class TransaksiRepository(AppDbContext appDbContext) : ITransaksiReposito
                 if (includes.Contains(nameof(User))) models = models.Include(x => x.User);
                 if (includes.Contains(nameof(Customer))) models = models.Include(x => x.Customer);
                 if (includes.Contains(nameof(DetailLayanan))) models = models.Include(x => x.DetailLayanan);
+                if (includes.Contains(nameof(Layanan))) models = models.Include(x => x.DetailLayanan).ThenInclude(x => x.Layanan);
                 if (includes.Contains(nameof(DetailProduk))) models = models.Include(x => x.DetailProduk);
+                if (includes.Contains(nameof(Produk))) models = models.Include(x => x.DetailProduk).ThenInclude(x => x.Produk);
             }
 
             return await models.OrderByDescending(x => x.Tanggal).ToListAsync();
@@ -65,7 +67,9 @@ public class TransaksiRepository(AppDbContext appDbContext) : ITransaksiReposito
                 if (includes.Contains(nameof(User))) model = model.Include(x => x.User);
                 if (includes.Contains(nameof(Customer))) model = model.Include(x => x.Customer);
                 if (includes.Contains(nameof(DetailLayanan))) model = model.Include(x => x.DetailLayanan);
+                if (includes.Contains(nameof(Layanan))) model = model.Include(x => x.DetailLayanan).ThenInclude(x => x.Layanan);
                 if (includes.Contains(nameof(DetailProduk))) model = model.Include(x => x.DetailProduk);
+                if (includes.Contains(nameof(Produk))) model = model.Include(x => x.DetailProduk).ThenInclude(x => x.Produk);
             }
 
             return (await model.FirstOrDefaultAsync(x => x.Id == id))!;
@@ -82,6 +86,8 @@ public class TransaksiRepository(AppDbContext appDbContext) : ITransaksiReposito
         {
             transaksi.Id = GenerateId("T", 2, transaksi.Tanggal, await appDbContext.Transaksi.Where(x => x.Tanggal.Date == transaksi.Tanggal.Date).Select(x => x.Id).ToListAsync());
             var model = await appDbContext.Transaksi.AddAsync(transaksi);
+            await appDbContext.DetailProduk.AddRangeAsync(transaksi.DetailProduk);
+            await appDbContext.DetailLayanan.AddRangeAsync(transaksi.DetailLayanan);
             int result = await appDbContext.SaveChangesAsync();
             return result > 0;
         }
