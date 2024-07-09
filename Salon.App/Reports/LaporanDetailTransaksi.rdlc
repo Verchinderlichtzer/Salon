@@ -482,13 +482,19 @@
                               <Color>#dbdedf</Color>
                               <Style>None</Style>
                             </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
                             <LeftBorder>
                               <Style>Solid</Style>
                             </LeftBorder>
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>=IIf(RowNumber(Nothing) Mod 2, "#F7F7F8", "#F1F2F3")</BackgroundColor>
+                            <BackgroundColor>White</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>3pt</PaddingLeft>
                             <PaddingRight>3pt</PaddingRight>
@@ -529,13 +535,19 @@
                               <Color>#dbdedf</Color>
                               <Style>None</Style>
                             </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
                             <LeftBorder>
                               <Style>Solid</Style>
                             </LeftBorder>
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>=IIf(RowNumber(Nothing) Mod 2, "#F7F7F8", "#F1F2F3")</BackgroundColor>
+                            <BackgroundColor>White</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>3pt</PaddingLeft>
                             <PaddingRight>3pt</PaddingRight>
@@ -580,7 +592,7 @@
                 <Style>None</Style>
               </Border>
               <BottomBorder>
-                <Style>Solid</Style>
+                <Style>None</Style>
               </BottomBorder>
             </Style>
           </Tablix>
@@ -719,7 +731,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= ": " + Fields!Id.Value</Value>
+                    <Value>= ": " + First(Fields!Id.Value, "DataSetDetailTransaksi")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>12pt</FontSize>
@@ -751,7 +763,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= ": " + Fields!NamaCustomer.Value</Value>
+                    <Value>= ": " + First(Fields!NamaCustomer.Value, "DataSetDetailTransaksi")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>12pt</FontSize>
@@ -783,7 +795,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= ": " + Format(Fields!Tanggal.Value, "dd MMM yyyy")</Value>
+                    <Value>= ": " + Format(First(Fields!Tanggal.Value, "DataSetDetailTransaksi"), "dd MMMM yyyy")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>12pt</FontSize>
@@ -1016,13 +1028,19 @@
                               <Color>#dbdedf</Color>
                               <Style>None</Style>
                             </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
                             <LeftBorder>
                               <Style>Solid</Style>
                             </LeftBorder>
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>=IIf(RowNumber(Nothing) Mod 2, "#F7F7F8", "#F1F2F3")</BackgroundColor>
+                            <BackgroundColor>White</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>3pt</PaddingLeft>
                             <PaddingRight>3pt</PaddingRight>
@@ -1060,13 +1078,19 @@
                               <Color>#dbdedf</Color>
                               <Style>None</Style>
                             </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
                             <LeftBorder>
                               <Style>Solid</Style>
                             </LeftBorder>
                             <RightBorder>
                               <Style>Solid</Style>
                             </RightBorder>
-                            <BackgroundColor>=IIf(RowNumber(Nothing) Mod 2, "#F7F7F8", "#F1F2F3")</BackgroundColor>
+                            <BackgroundColor>White</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>3pt</PaddingLeft>
                             <PaddingRight>3pt</PaddingRight>
@@ -1110,7 +1134,7 @@
                 <Style>None</Style>
               </Border>
               <BottomBorder>
-                <Style>Solid</Style>
+                <Style>None</Style>
               </BottomBorder>
             </Style>
           </Tablix>

@@ -47,6 +47,8 @@ public partial class FLayanan : Form, ILayananForm
             });
             if (!result)
                 MessageBox.Show("Layanan gagal ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Layanan berhasil ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
@@ -58,6 +60,8 @@ public partial class FLayanan : Form, ILayananForm
             });
             if (!result)
                 MessageBox.Show("Layanan gagal diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Layanan berhasil diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         btnRefresh.PerformClick();
     }
@@ -71,6 +75,8 @@ public partial class FLayanan : Form, ILayananForm
             bool result = await _layananRepository.DeleteAsync(id!);
             if (!result)
                 MessageBox.Show("Layanan gagal dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Layanan berhasil dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnRefresh.PerformClick();
         }
     }

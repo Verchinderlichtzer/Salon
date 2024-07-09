@@ -29,9 +29,8 @@ partial class FTransaksi
     private void InitializeComponent()
     {
         DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
         panel1 = new Panel();
+        cTanggal = new DateTimePicker();
         cID = new ComboBox();
         label2 = new Label();
         label3 = new Label();
@@ -58,15 +57,14 @@ partial class FTransaksi
         label8 = new Label();
         lblBiayaProduk = new Label();
         dgvLayanan = new DataGridView();
-        dgvLayananId = new DataGridViewTextBoxColumn();
-        dgvLayananNama = new DataGridViewTextBoxColumn();
-        dgvLayananTarif = new DataGridViewTextBoxColumn();
         dgvProduk = new DataGridView();
         dgvProdukId = new DataGridViewTextBoxColumn();
         dgvProdukNama = new DataGridViewTextBoxColumn();
         dgvProdukJumlah = new DataGridViewTextBoxColumn();
         dgvProdukHarga = new DataGridViewTextBoxColumn();
-        cTanggal = new DateTimePicker();
+        dgvLayananId = new DataGridViewTextBoxColumn();
+        dgvLayananNama = new DataGridViewTextBoxColumn();
+        dgvLayananTarif = new DataGridViewTextBoxColumn();
         panel1.SuspendLayout();
         panel2.SuspendLayout();
         panel3.SuspendLayout();
@@ -96,6 +94,13 @@ partial class FTransaksi
         panel1.Size = new Size(984, 106);
         panel1.TabIndex = 0;
         // 
+        // cTanggal
+        // 
+        cTanggal.Location = new Point(81, 73);
+        cTanggal.Name = "cTanggal";
+        cTanggal.Size = new Size(254, 23);
+        cTanggal.TabIndex = 15;
+        // 
         // cID
         // 
         cID.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -121,7 +126,7 @@ partial class FTransaksi
         label3.AutoSize = true;
         label3.Location = new Point(641, 47);
         label3.Name = "label3";
-        label3.Size = new Size(64, 15);
+        label3.Size = new Size(63, 15);
         label3.TabIndex = 10;
         label3.Text = "Total Biaya";
         // 
@@ -175,7 +180,7 @@ partial class FTransaksi
         label1.AutoSize = true;
         label1.Location = new Point(12, 76);
         label1.Name = "label1";
-        label1.Size = new Size(49, 15);
+        label1.Size = new Size(48, 15);
         label1.TabIndex = 0;
         label1.Text = "Tanggal";
         // 
@@ -256,7 +261,7 @@ partial class FTransaksi
         panel5.BorderStyle = BorderStyle.FixedSingle;
         panel5.Controls.Add(label11);
         panel5.Controls.Add(lblBiayaLayanan);
-        panel5.Location = new Point(496, 422);
+        panel5.Location = new Point(496, 391);
         panel5.Name = "panel5";
         panel5.Size = new Size(485, 32);
         panel5.TabIndex = 18;
@@ -330,7 +335,7 @@ partial class FTransaksi
         panel4.BorderStyle = BorderStyle.FixedSingle;
         panel4.Controls.Add(label8);
         panel4.Controls.Add(lblBiayaProduk);
-        panel4.Location = new Point(3, 422);
+        panel4.Location = new Point(3, 391);
         panel4.Name = "panel4";
         panel4.Size = new Size(485, 32);
         panel4.TabIndex = 10;
@@ -376,34 +381,12 @@ partial class FTransaksi
         dgvLayanan.Location = new Point(496, 71);
         dgvLayanan.Name = "dgvLayanan";
         dgvLayanan.RowHeadersVisible = false;
-        dgvLayanan.Size = new Size(485, 345);
+        dgvLayanan.Size = new Size(485, 315);
         dgvLayanan.TabIndex = 9;
         dgvLayanan.CellEndEdit += dgv_CellEndEdit;
         dgvLayanan.RowsAdded += dgv_RowsAdded;
         dgvLayanan.RowsRemoved += dgv_RowsRemoved;
         dgvLayanan.KeyDown += dgv_KeyDown;
-        // 
-        // dgvLayananId
-        // 
-        dgvLayananId.FillWeight = 47F;
-        dgvLayananId.HeaderText = "Id";
-        dgvLayananId.Name = "dgvLayananId";
-        dgvLayananId.ReadOnly = true;
-        // 
-        // dgvLayananNama
-        // 
-        dgvLayananNama.FillWeight = 354F;
-        dgvLayananNama.HeaderText = "Nama";
-        dgvLayananNama.Name = "dgvLayananNama";
-        dgvLayananNama.ReadOnly = true;
-        // 
-        // dgvLayananTarif
-        // 
-        dataGridViewCellStyle2.Format = "N0";
-        dgvLayananTarif.DefaultCellStyle = dataGridViewCellStyle2;
-        dgvLayananTarif.FillWeight = 83F;
-        dgvLayananTarif.HeaderText = "Tarif";
-        dgvLayananTarif.Name = "dgvLayananTarif";
         // 
         // dgvProduk
         // 
@@ -417,7 +400,7 @@ partial class FTransaksi
         dgvProduk.Location = new Point(3, 71);
         dgvProduk.Name = "dgvProduk";
         dgvProduk.RowHeadersVisible = false;
-        dgvProduk.Size = new Size(485, 345);
+        dgvProduk.Size = new Size(485, 315);
         dgvProduk.TabIndex = 8;
         dgvProduk.CellEndEdit += dgv_CellEndEdit;
         dgvProduk.RowsAdded += dgv_RowsAdded;
@@ -446,18 +429,29 @@ partial class FTransaksi
         // 
         // dgvProdukHarga
         // 
-        dataGridViewCellStyle3.Format = "N0";
-        dgvProdukHarga.DefaultCellStyle = dataGridViewCellStyle3;
         dgvProdukHarga.FillWeight = 89F;
         dgvProdukHarga.HeaderText = "Harga";
         dgvProdukHarga.Name = "dgvProdukHarga";
         // 
-        // cTanggal
+        // dgvLayananId
         // 
-        cTanggal.Location = new Point(81, 73);
-        cTanggal.Name = "cTanggal";
-        cTanggal.Size = new Size(254, 23);
-        cTanggal.TabIndex = 15;
+        dgvLayananId.FillWeight = 47F;
+        dgvLayananId.HeaderText = "Id";
+        dgvLayananId.Name = "dgvLayananId";
+        dgvLayananId.ReadOnly = true;
+        // 
+        // dgvLayananNama
+        // 
+        dgvLayananNama.FillWeight = 354F;
+        dgvLayananNama.HeaderText = "Nama";
+        dgvLayananNama.Name = "dgvLayananNama";
+        dgvLayananNama.ReadOnly = true;
+        // 
+        // dgvLayananTarif
+        // 
+        dgvLayananTarif.FillWeight = 83F;
+        dgvLayananTarif.HeaderText = "Tarif";
+        dgvLayananTarif.Name = "dgvLayananTarif";
         // 
         // FTransaksi
         // 
@@ -516,6 +510,7 @@ partial class FTransaksi
     private Label label10;
     private Label label9;
     private ComboBox cID;
+    private DateTimePicker cTanggal;
     private DataGridViewTextBoxColumn dgvLayananId;
     private DataGridViewTextBoxColumn dgvLayananNama;
     private DataGridViewTextBoxColumn dgvLayananTarif;
@@ -523,5 +518,4 @@ partial class FTransaksi
     private DataGridViewTextBoxColumn dgvProdukNama;
     private DataGridViewTextBoxColumn dgvProdukJumlah;
     private DataGridViewTextBoxColumn dgvProdukHarga;
-    private DateTimePicker cTanggal;
 }

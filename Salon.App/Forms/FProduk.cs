@@ -55,6 +55,8 @@ public partial class FProduk : Form, IProdukForm
             });
             if (!result)
                 MessageBox.Show("Produk gagal ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Produk berhasil ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
@@ -67,6 +69,8 @@ public partial class FProduk : Form, IProdukForm
             });
             if (!result)
                 MessageBox.Show("Produk gagal diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Produk berhasil diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         btnRefresh.PerformClick();
     }
@@ -80,6 +84,8 @@ public partial class FProduk : Form, IProdukForm
             bool result = await _produkRepository.DeleteAsync(id!);
             if (!result)
                 MessageBox.Show("Produk gagal dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Produk berhasil dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnRefresh.PerformClick();
         }
     }

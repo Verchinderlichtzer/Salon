@@ -61,6 +61,8 @@ public partial class FCustomer : Form, ICustomerForm
             });
             if (!result)
                 MessageBox.Show("Customer gagal ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Customer berhasil ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
@@ -75,6 +77,8 @@ public partial class FCustomer : Form, ICustomerForm
             });
             if (!result)
                 MessageBox.Show("Customer gagal diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Customer berhasil diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         btnRefresh.PerformClick();
     }
@@ -88,6 +92,8 @@ public partial class FCustomer : Form, ICustomerForm
             bool result = await _customerRepository.DeleteAsync(id!);
             if (!result)
                 MessageBox.Show("Customer gagal dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Customer berhasil dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnRefresh.PerformClick();
         }
     }

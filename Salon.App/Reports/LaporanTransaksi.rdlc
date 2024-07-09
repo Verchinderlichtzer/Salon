@@ -492,7 +492,6 @@
                             <PaddingRight>3pt</PaddingRight>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -509,7 +508,7 @@
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
-                                    <Format>dd MMM yyyy</Format>
+                                    <Format>dd/MM/yyyy</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -636,7 +635,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!BiayaProduk.Value * Fields!BiayaLayanan.Value</Value>
+                                  <Value>=Fields!BiayaProduk.Value + Fields!BiayaLayanan.Value</Value>
                                   <Style>
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
@@ -669,6 +668,7 @@
                             <PaddingRight>3pt</PaddingRight>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Security.Cryptography;
+using System.Windows.Forms;
 
 namespace Salon.App.Forms;
 public partial class FDaftarTransaksi : Form, IDaftarTransaksiForm
@@ -15,7 +16,8 @@ public partial class FDaftarTransaksi : Form, IDaftarTransaksiForm
 
     public async Task RefreshDGV()
     {
-        dgv.DataSource = (await _transaksiRepository.GetAsync([nameof(User), nameof(Customer), nameof(DetailLayanan), nameof(DetailProduk)])).Where(x => x.Customer.Nama.Search(cCariTransaksi.Text) || x.Id.Search(cCariTransaksi.Text) || x.Tanggal.ToString("dd MMMM yyyy").Search(cCariTransaksi.Text)).Select(x => new {
+        dgv.DataSource = (await _transaksiRepository.GetAsync([nameof(User), nameof(Customer), nameof(DetailLayanan), nameof(DetailProduk)])).Where(x => x.Customer.Nama.Search(cCariTransaksi.Text) || x.Id.Search(cCariTransaksi.Text) || x.Tanggal.ToString("dd MMMM yyyy").Search(cCariTransaksi.Text)).Select(x => new
+        {
             x.Id,
             Customer = $"{x.IdCustomer} — {x.Customer.Nama}",
             x.Tanggal,
@@ -65,7 +67,9 @@ public partial class FDaftarTransaksi : Form, IDaftarTransaksiForm
         {
             bool result = await _transaksiRepository.DeleteAsync(id!);
             if (!result)
-                MessageBox.Show("DaftarTransaksi gagal dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Transaksi gagal dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Transaksi berhasil dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnRefresh.PerformClick();
         }
     }
@@ -74,6 +78,8 @@ public partial class FDaftarTransaksi : Form, IDaftarTransaksiForm
     {
         cCariTransaksi.Clear();
         await RefreshDGV();
+        dgvProduk.DataSource = null;
+        dgvLayanan.DataSource = null;
 
         btnHapus.Enabled = false;
         //Clipboard.SetText(string.Join(" - ", dgv.Columns.Cast<DataGridViewColumn>().Select(c => c.Width)));
@@ -84,8 +90,41 @@ public partial class FDaftarTransaksi : Form, IDaftarTransaksiForm
         await RefreshDGV();
     }
 
-    private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+    private async void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
     {
         btnHapus.Enabled = true;
+        string id = dgv.CurrentRow.Cells[0].Value.ToString()!;
+        lblProduk.Text = $"Produk yang dibeli pada \"{id}\"";
+        lblLayanan.Text = $"Layanan yang diminta pada \"{id}\"";
+        var result = await _transaksiRepository.FindAsync(id, [nameof(Produk), nameof(Layanan)]);
+        dgvProduk.DataSource = result.DetailProduk.ConvertAll(x => new
+        {
+            Id = x.IdProduk,
+            x.Produk.Nama,
+            x.Jumlah,
+            x.Harga
+        });
+        dgvLayanan.DataSource = result.DetailLayanan.ConvertAll(x => new
+        {
+            Id = x.IdLayanan,
+            x.Layanan.Nama,
+            x.Tarif
+        });
+
+        dgvProduk.Columns[1].Width = 220;
+        dgvLayanan.Columns[1].Width = 210;
+
+        dgvProduk.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dgvProduk.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dgvProduk.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+        dgvProduk.Columns[3].DefaultCellStyle.Format = "N0";
+        dgvProduk.Columns[0].HeaderText = "Id Produk";
+
+        dgvLayanan.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        dgvLayanan.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+        dgvLayanan.Columns[2].DefaultCellStyle.Format = "N0";
+        dgvLayanan.Columns[0].HeaderText = "Id Layanan";
     }
 }

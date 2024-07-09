@@ -149,6 +149,8 @@ public partial class FTransaksi : Form, ITransaksiForm
             });
             if (!result)
                 MessageBox.Show("Transaksi gagal ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Transaksi berhasil ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
@@ -166,22 +168,11 @@ public partial class FTransaksi : Form, ITransaksiForm
             });
             if (!result)
                 MessageBox.Show("Transaksi gagal diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Transaksi berhasil diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         btnRefresh.PerformClick();
     }
-
-    //private async void btnHapus_Click(object sender, EventArgs e)
-    //{
-    //    var id = dgvProduk.CurrentRow.Cells[0].Value.ToString();
-    //    DialogResult dr = MessageBox.Show($"Hapus {id}?", "Konfirmasi hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-    //    if (dr == DialogResult.Yes)
-    //    {
-    //        bool result = await _transaksiRepository.DeleteAsync(id!);
-    //        if (!result)
-    //            MessageBox.Show("Transaksi gagal dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    //        btnRefresh.PerformClick();
-    //    }
-    //}
 
     private async void btnRefresh_Click(object sender, EventArgs e)
     {

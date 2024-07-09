@@ -411,7 +411,7 @@
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
-                                    <Format>dd MMM yyyy</Format>
+                                    <Format>dd/MM/yyyy</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -483,7 +483,6 @@
                             <PaddingRight>3pt</PaddingRight>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -528,7 +527,6 @@
                             <PaddingRight>3pt</PaddingRight>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -573,7 +571,6 @@
                             <PaddingRight>3pt</PaddingRight>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -943,7 +940,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>= ": " + Format(Fields!TanggalLahir.Value, "dd MMM yyyy")</Value>
+                    <Value>= ": " + Format(Fields!TanggalLahir.Value, "dd/MM/yyyy")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>12pt</FontSize>

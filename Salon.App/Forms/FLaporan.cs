@@ -22,7 +22,7 @@ public partial class FLaporan : Form, ILaporanForm
     public async Task LoadData()
     {
         lbDetailTransaksi.DataSource = (await _transaksiRepository.GetAsync([nameof(Customer)])).Select(x => $"{x.Id} ({x.Customer.Nama})").Where(x => x.Search(cCariTransaksi.Text)).ToList();
-        lbTransaksiCustomer.DataSource = (await _customerRepository.GetAsync()).Select(x => $"{x.Id} — {x.Nama}").Where(x => x.Search(cCariTransaksi.Text)).ToList();
+        lbTransaksiCustomer.DataSource = (await _customerRepository.GetAsync()).Select(x => $"{x.Id} — {x.Nama}").Where(x => x.Search(cCariCustomer.Text)).ToList();
 
         cTahun.Items.Clear();
         for (int year = DateTime.Today.Year; year >= 2022; year--) cTahun.Items.Add(year);
@@ -43,12 +43,7 @@ public partial class FLaporan : Form, ILaporanForm
         using Stream reportDefinition = new FileStream($"Reports/Laporan{judul}.rdlc", FileMode.Open);
         LocalReport report = new();
         report.LoadReportDefinition(reportDefinition);
-        if (judul != ReportType.Grafik && judul != ReportType.DetailTransaksi)
-        {
-            report.SetParameters(new ReportParameter("Keterangan", filterText));
-            report.DataSources.Add(new ReportDataSource($"DataSet{judul}", data));
-        }
-        else if (judul == ReportType.Grafik)
+        if (judul == ReportType.Grafik)
         {
             report.SetParameters(new ReportParameter("Tahun", filterText));
             report.DataSources.Add(new ReportDataSource("DataSetGrafik", data));
@@ -57,9 +52,14 @@ public partial class FLaporan : Form, ILaporanForm
         {
             report.SetParameters(new ReportParameter("Keterangan", filterText));
             var aku = (IEnumerable<DetailTransaksiDTO>)data;
-            report.DataSources.Add(new ReportDataSource("DataSetDetailTransaksi", aku.Select(x => new {x.Id, x.NamaCustomer, x.Tanggal, x.BiayaProduk, x.BiayaLayanan, x.TotalBiaya})));
+            report.DataSources.Add(new ReportDataSource("DataSetDetailTransaksi", aku.Select(x => new { x.Id, x.NamaCustomer, x.Tanggal, x.BiayaProduk, x.BiayaLayanan, x.TotalBiaya })));
             report.DataSources.Add(new ReportDataSource("DataSetDetailProduk", aku.First().DetailProdukDTO));
             report.DataSources.Add(new ReportDataSource("DataSetDetailLayanan", aku.First().DetailLayananDTO));
+        }
+        else
+        {
+            report.SetParameters(new ReportParameter("Keterangan", filterText));
+            report.DataSources.Add(new ReportDataSource($"DataSet{judul}", data));
         }
         byte[] pdf = report.Render("PDF");
         string fileName = $"Laporan {judul.ToString().SeparateByCase()} {DateTime.Now:dd-MM-yy hh.mm.ss tt}.pdf";
@@ -71,11 +71,6 @@ public partial class FLaporan : Form, ILaporanForm
         using FileStream fileStream = new(outputPath, FileMode.Create);
         stream.WriteTo(fileStream);
         MessageBox.Show("Laporan berhasil dibuat", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-    }
-
-    private async void OnPencarianChanged(object sender, EventArgs e)
-    {
-        await LoadData();
     }
 
     private async void btnProduk_Click(object sender, EventArgs e)
@@ -142,7 +137,7 @@ public partial class FLaporan : Form, ILaporanForm
 
     private async void btnDetailTransaksi_Click(object sender, EventArgs e)
     {
-        var data = (await _transaksiRepository.GetAsync([nameof(Customer), nameof(Produk), nameof(Layanan)])).Where(x => x.Id == lbDetailTransaksi.SelectedItem!.ToString()).Select(x => new DetailTransaksiDTO
+        var data = (await _transaksiRepository.GetAsync([nameof(Customer), nameof(Produk), nameof(Layanan)])).Where(x => x.Id == lbDetailTransaksi.SelectedItem!.ToString()!.Left(11)).Select(x => new DetailTransaksiDTO
         {
             Id = x.Id,
             NamaCustomer = x.Customer.Nama,
@@ -163,12 +158,12 @@ public partial class FLaporan : Form, ILaporanForm
                 Tarif = x.Tarif
             })
         });
-        GenerateReport(ReportType.DetailTransaksi, data, $"Laporan transaksi dengan id \"{lbDetailTransaksi.SelectedItem}\"");
+        GenerateReport(ReportType.DetailTransaksi, data, $"Laporan transaksi dengan id \"{lbDetailTransaksi.SelectedItem!.ToString()!.Left(11)}\"");
     }
 
     private async void btnTransaksiCustomer_Click(object sender, EventArgs e)
     {
-        var data = (await _transaksiRepository.GetAsync([nameof(Customer)])).Where(x => x.IdCustomer == lbTransaksiCustomer.SelectedItem!.ToString()).Select(x => new
+        var data = (await _transaksiRepository.GetAsync([nameof(Customer)])).Where(x => x.IdCustomer == lbTransaksiCustomer.SelectedItem!.ToString()!.Left(7)).Select(x => new
         {
             x.Id,
             x.Customer.Nama,
@@ -183,6 +178,16 @@ public partial class FLaporan : Form, ILaporanForm
             x.TotalBiaya
         });
         GenerateReport(ReportType.TransaksiCustomer, data, $"Laporan transaksi oleh customer \"{lbTransaksiCustomer.SelectedItem!.ToString()!.Mid(10)}\"");
+    }
+
+    private async void cCariTransaksi_TextChanged(object sender, EventArgs e)
+    {
+        lbDetailTransaksi.DataSource = (await _transaksiRepository.GetAsync([nameof(Customer)])).Select(x => $"{x.Id} ({x.Customer.Nama})").Where(x => x.Search(cCariTransaksi.Text)).ToList();
+    }
+
+    private async void cCariCustomer_TextChanged(object sender, EventArgs e)
+    {
+        lbTransaksiCustomer.DataSource = (await _customerRepository.GetAsync()).Select(x => $"{x.Id} — {x.Nama}").Where(x => x.Search(cCariCustomer.Text)).ToList();
     }
 
     #region Enums

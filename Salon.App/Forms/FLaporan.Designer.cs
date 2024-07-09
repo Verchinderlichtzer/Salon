@@ -94,7 +94,7 @@ partial class FLaporan
         // 
         resources.ApplyResources(cCariCustomer, "cCariCustomer");
         cCariCustomer.Name = "cCariCustomer";
-        cCariCustomer.TextChanged += OnPencarianChanged;
+        cCariCustomer.TextChanged += cCariCustomer_TextChanged;
         // 
         // groupBox2
         // 
@@ -123,7 +123,7 @@ partial class FLaporan
         // 
         resources.ApplyResources(cCariTransaksi, "cCariTransaksi");
         cCariTransaksi.Name = "cCariTransaksi";
-        cCariTransaksi.TextChanged += OnPencarianChanged;
+        cCariTransaksi.TextChanged += cCariTransaksi_TextChanged;
         // 
         // btnLayanan
         // 

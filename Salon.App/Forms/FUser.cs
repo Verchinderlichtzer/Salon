@@ -64,6 +64,8 @@ public partial class FUser : Form, IUserForm
             });
             if (!result)
                 MessageBox.Show("User gagal ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("User berhasil ditambah", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
@@ -78,6 +80,8 @@ public partial class FUser : Form, IUserForm
             });
             if (!result)
                 MessageBox.Show("User gagal diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("User berhasil diubah", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         btnRefresh.PerformClick();
     }
@@ -92,6 +96,8 @@ public partial class FUser : Form, IUserForm
             bool result = await _userRepository.DeleteAsync(id!);
             if (!result)
                 MessageBox.Show("User gagal dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("User berhasil dihapus", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnRefresh.PerformClick();
         }
     }

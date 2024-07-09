@@ -455,7 +455,6 @@
                             <PaddingRight>3pt</PaddingRight>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -515,7 +514,7 @@
                                     <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
-                                    <Format>dd MMM yyyy</Format>
+                                    <Format>dd/MM/yyyy</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>

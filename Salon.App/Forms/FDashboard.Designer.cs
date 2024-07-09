@@ -82,7 +82,7 @@ partial class FDashboard
         panel1.Dock = DockStyle.Fill;
         panel1.Location = new Point(0, 0);
         panel1.Name = "panel1";
-        panel1.Size = new Size(1097, 621);
+        panel1.Size = new Size(1097, 581);
         panel1.TabIndex = 6;
         // 
         // panel2
@@ -92,7 +92,7 @@ partial class FDashboard
         panel2.Dock = DockStyle.Fill;
         panel2.Location = new Point(0, 120);
         panel2.Name = "panel2";
-        panel2.Size = new Size(1097, 501);
+        panel2.Size = new Size(1097, 461);
         panel2.TabIndex = 2;
         // 
         // pictureBox2
@@ -101,7 +101,7 @@ partial class FDashboard
         pictureBox2.Image = Properties.Resources.dua;
         pictureBox2.Location = new Point(723, 6);
         pictureBox2.Name = "pictureBox2";
-        pictureBox2.Size = new Size(362, 483);
+        pictureBox2.Size = new Size(362, 443);
         pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
         pictureBox2.TabIndex = 1;
         pictureBox2.TabStop = false;
@@ -112,7 +112,7 @@ partial class FDashboard
         pictureBox1.Image = Properties.Resources.satu;
         pictureBox1.Location = new Point(12, 6);
         pictureBox1.Name = "pictureBox1";
-        pictureBox1.Size = new Size(705, 483);
+        pictureBox1.Size = new Size(705, 443);
         pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         pictureBox1.TabIndex = 0;
         pictureBox1.TabStop = false;
@@ -279,7 +279,7 @@ partial class FDashboard
         // statusStrip1
         // 
         statusStrip1.Items.AddRange(new ToolStripItem[] { ssIdUser, ssNamaUser, ssStatusUser });
-        statusStrip1.Location = new Point(0, 599);
+        statusStrip1.Location = new Point(0, 559);
         statusStrip1.Name = "statusStrip1";
         statusStrip1.Size = new Size(1097, 22);
         statusStrip1.TabIndex = 7;
@@ -307,7 +307,7 @@ partial class FDashboard
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(1097, 621);
+        ClientSize = new Size(1097, 581);
         Controls.Add(statusStrip1);
         Controls.Add(panel1);
         Name = "FDashboard";

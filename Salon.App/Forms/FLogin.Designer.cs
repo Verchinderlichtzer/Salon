@@ -87,10 +87,11 @@ partial class FLogin
         // 
         // btnOk
         // 
-        btnOk.BackColor = Color.PaleGreen;
+        btnOk.BackColor = Color.FromArgb(0, 123, 255);
         btnOk.FlatAppearance.BorderSize = 0;
         btnOk.FlatStyle = FlatStyle.Flat;
         btnOk.Font = new Font("Segoe UI", 10F);
+        btnOk.ForeColor = Color.White;
         btnOk.Location = new Point(12, 121);
         btnOk.Name = "btnOk";
         btnOk.Size = new Size(360, 28);
@@ -103,7 +104,7 @@ partial class FLogin
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(384, 161);
+        ClientSize = new Size(384, 181);
         Controls.Add(btnOk);
         Controls.Add(label1);
         Controls.Add(cPassword);
@@ -111,8 +112,8 @@ partial class FLogin
         Controls.Add(cID);
         Controls.Add(label9);
         MaximizeBox = false;
-        MaximumSize = new Size(400, 200);
-        MinimumSize = new Size(400, 200);
+        MaximumSize = new Size(400, 220);
+        MinimumSize = new Size(400, 220);
         Name = "FLogin";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Login - Salon";
