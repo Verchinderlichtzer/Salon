@@ -63,6 +63,14 @@ public class AppDbContext : DbContext
             Nama = "Rosma Nelli",
             JenisKelamin = JenisKelamin.Wanita,
             Telepon = "083665519043"
+        },
+        new User
+        {
+            Id = "user1",
+            Password = "3jqbFvenDDp2g3HTQ6ABlw==",
+            Nama = "Fajar",
+            JenisKelamin = JenisKelamin.Pria,
+            Telepon = "085344628435"
         });
 
         modelBuilder.Entity<Customer>().HasData(
@@ -78,6 +86,15 @@ public class AppDbContext : DbContext
         new Customer
         {
             Id = "C-00002",
+            Nama = "Yuni",
+            JenisKelamin = JenisKelamin.Wanita,
+            TanggalLahir = new(1994, 7, 22),
+            Alamat = "Tangerang",
+            Telepon = "0884 6833 8864"
+        },
+        new Customer
+        {
+            Id = "C-00003",
             Nama = "Andi",
             JenisKelamin = JenisKelamin.Pria,
             TanggalLahir = new(1997, 4, 7),

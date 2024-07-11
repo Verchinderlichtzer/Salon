@@ -101,7 +101,7 @@ partial class FDashboard
         pictureBox2.Image = Properties.Resources.dua;
         pictureBox2.Location = new Point(723, 6);
         pictureBox2.Name = "pictureBox2";
-        pictureBox2.Size = new Size(362, 443);
+        pictureBox2.Size = new Size(362, 430);
         pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
         pictureBox2.TabIndex = 1;
         pictureBox2.TabStop = false;
@@ -112,7 +112,7 @@ partial class FDashboard
         pictureBox1.Image = Properties.Resources.satu;
         pictureBox1.Location = new Point(12, 6);
         pictureBox1.Name = "pictureBox1";
-        pictureBox1.Size = new Size(705, 443);
+        pictureBox1.Size = new Size(705, 430);
         pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
         pictureBox1.TabIndex = 0;
         pictureBox1.TabStop = false;
@@ -312,7 +312,7 @@ partial class FDashboard
         Controls.Add(panel1);
         Name = "FDashboard";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "FDashboard";
+        Text = "Dashboard";
         FormClosing += FDashboard_FormClosing;
         Load += FDashboard_Load;
         panel1.ResumeLayout(false);
