@@ -11,7 +11,7 @@ using Salon.Shared;
 namespace Salon.Shared.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240626113159_First")]
+    [Migration("20240711080736_First")]
     partial class First
     {
         /// <inheritdoc />
@@ -59,6 +59,15 @@ namespace Salon.Shared.Migrations
                         new
                         {
                             Id = "C-00002",
+                            Alamat = "Tangerang",
+                            JenisKelamin = (byte)2,
+                            Nama = "Yuni",
+                            TanggalLahir = new DateTime(1994, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Telepon = "0884 6833 8864"
+                        },
+                        new
+                        {
+                            Id = "C-00003",
                             Alamat = "Jakarta",
                             JenisKelamin = (byte)1,
                             Nama = "Andi",
@@ -318,6 +327,15 @@ namespace Salon.Shared.Migrations
                             Nama = "Rosma Nelli",
                             Password = "3jqbFvenDDp2g3HTQ6ABlw==",
                             Telepon = "083665519043"
+                        },
+                        new
+                        {
+                            Id = "user1",
+                            JenisKelamin = (byte)1,
+                            JenisUser = (byte)1,
+                            Nama = "Fajar",
+                            Password = "3jqbFvenDDp2g3HTQ6ABlw==",
+                            Telepon = "085344628435"
                         });
                 });
 

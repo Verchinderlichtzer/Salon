@@ -136,8 +136,8 @@ namespace Salon.Shared.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     IdTransaksi = table.Column<string>(type: "TEXT", nullable: false),
                     IdProduk = table.Column<string>(type: "TEXT", nullable: false),
-                    Harga = table.Column<int>(type: "INTEGER", nullable: false),
-                    Jumlah = table.Column<int>(type: "INTEGER", nullable: false)
+                    Jumlah = table.Column<int>(type: "INTEGER", nullable: false),
+                    Harga = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -162,7 +162,8 @@ namespace Salon.Shared.Migrations
                 values: new object[,]
                 {
                     { "C-00001", "Bekasi", (byte)2, "Putri", new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "0853 4677 3443" },
-                    { "C-00002", "Jakarta", (byte)1, "Andi", new DateTime(1997, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "0833 5275 9486" }
+                    { "C-00002", "Tangerang", (byte)2, "Yuni", new DateTime(1994, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "0884 6833 8864" },
+                    { "C-00003", "Jakarta", (byte)1, "Andi", new DateTime(1997, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "0833 5275 9486" }
                 });
 
             migrationBuilder.InsertData(
@@ -195,7 +196,11 @@ namespace Salon.Shared.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "JenisKelamin", "JenisUser", "Nama", "Password", "Telepon" },
-                values: new object[] { "Admin", (byte)2, (byte)0, "Rosma Nelli", "3jqbFvenDDp2g3HTQ6ABlw==", "083665519043" });
+                values: new object[,]
+                {
+                    { "Admin", (byte)2, (byte)0, "Rosma Nelli", "3jqbFvenDDp2g3HTQ6ABlw==", "083665519043" },
+                    { "user1", (byte)1, (byte)1, "Fajar", "3jqbFvenDDp2g3HTQ6ABlw==", "085344628435" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DetailLayanan_IdLayanan",

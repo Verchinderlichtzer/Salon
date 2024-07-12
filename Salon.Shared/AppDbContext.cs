@@ -70,7 +70,8 @@ public class AppDbContext : DbContext
             Password = "3jqbFvenDDp2g3HTQ6ABlw==",
             Nama = "Fajar",
             JenisKelamin = JenisKelamin.Pria,
-            Telepon = "085344628435"
+            Telepon = "085344628435",
+            JenisUser = JenisUser.Karyawan
         });
 
         modelBuilder.Entity<Customer>().HasData(
